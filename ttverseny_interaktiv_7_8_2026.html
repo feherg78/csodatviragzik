@@ -397,7 +397,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <div class="meta-row">
     <span>⏱ Megoldási idő: <strong>60 perc</strong></span>
     <span>📋 Feladatok: <strong>20</strong></span>
-    <span>🏆 Max. pontszám: <strong>60 pont</strong></span>
+    <span>🏆 Max. pontszám: <strong>68 pont</strong></span>
   </div>
 </header>
 
@@ -428,7 +428,6 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <li>Olvasd el figyelmesen minden feladat szövegét, mielőtt válaszolsz!</li>
     <li>A feleletválasztós feladatoknál <strong>csak egy</strong> választ jelölj be!</li>
     <li>A <strong>💾 Mentés</strong> gomb elmenti a válaszaidat a böngészőben – de ne zárd be az oldalt az elmentés előtt!</li>
-    <li>Feladatok: <span style="color:#c0392b">■ Könnyű</span> · <span style="color:#1a5276">■ Közepes</span> · <span style="color:#1a6b4a">■ Nehéz</span></li>
   </ul>
 </div>
 
@@ -438,8 +437,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
 ══════════════════════════════════ -->
 <div class="part-header">
   <div class="part-badge">I. Rész</div>
-  <div class="part-title">Könnyű feladatok</div>
-  <div class="part-info">1–8. feladat · 11 pont</div>
+  <div class="part-info">1–8. feladat · 15 pont</div>
 </div>
 
 <!-- 1 -->
@@ -514,6 +512,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-fold">Földrajz</span><span class="tag tag-pont">2 pont</span></div>
       <div class="question">Az alábbi ábra a Föld légkörének rétegeit mutatja. Írd be a megfelelő réteg nevét!</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A Föld légköre több rétegre tagolódik. A <strong>troposzféra</strong> (0–12 km) tartalmazza a levegő nagy részét és itt zajlanak az időjárási folyamatok. A <strong>sztratoszféra</strong> (12–50 km) tartalmazza az ózonréteget, amely elnyeli az UV-sugárzást. A <strong>mezoszféra</strong> (50–80 km) felett helyezkedik el a <strong>termoszféra</strong>, ahol az ionizált részecskék az északi fény jelenségét okozzák.</div>
       <figure class="figure">
         <svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;font-family:'Source Serif 4',serif;">
           <defs>
@@ -559,8 +558,10 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <div class="task-header">
     <div class="task-num">5</div>
     <div class="task-body">
-      <div class="task-tags"><span class="tag tag-bio">Biológia</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">1 pont</span></div>
-      <div class="question">Egészítsd ki a fotoszintézis összefoglaló egyenletét!</div>
+      <div class="task-tags"><span class="tag tag-bio">Biológia</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">2 pont</span></div>
+      <div class="question">Egészítsd ki a fotoszintézis összefoglaló egyenletét a hiányzó anyagokkal! (Mindkét anyag megnevezése szükséges – 1-1 pont.)</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A <strong>fotoszintézis</strong> a zöld növények, algák és néhány baktérium alapvető életfolyamata, amelynek során fényenergia segítségével szervetlen anyagokból (CO₂ és H₂O) szerves anyagot (glükózt) és oxigént állítanak elő. A folyamat a <strong>kloroplasztiszokban</strong> zajlik, amelyekben klorofill pigment található. A fotoszintézis nemcsak a növények tápanyagát biztosítja, hanem a légkör oxigénkészletét is fenntartja.</div>
+      
       <div class="equation-box">
         6 CO₂ &nbsp;+&nbsp;
         <input type="text" class="inline-input short" data-save="q5_1" placeholder="??" style="text-align:center;">
@@ -580,8 +581,8 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <div class="task-header">
     <div class="task-num">6</div>
     <div class="task-body">
-      <div class="task-tags"><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">2 pont</span></div>
-      <div class="question">Az alábbi táblázat különböző oldatok pH-értékét tartalmazza. Válaszolj a kérdésekre!</div>
+      <div class="task-tags"><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">5 pont</span></div>
+      <div class="question">Az alábbi táblázat különböző oldatok pH-értékét tartalmazza. Töltsd ki a kémhatás oszlopot, majd válaszolj! <strong>Emlékeztető:</strong> pH &lt; 7 = savas, pH = 7 = semleges, pH &gt; 7 = lúgos. Minél kisebb a pH, annál erősebb a sav; minél nagyobb, annál erősebb a lúg.</div>
       <table>
         <tr><th>Oldat</th><th>pH-érték</th><th>Kémhatás (savas/semleges/lúgos)</th></tr>
         <tr><td class="td-left">Gyomorsav</td><td>1,5</td><td><input class="answer-input" data-save="q6_t1" placeholder="…"></td></tr>
@@ -591,10 +592,13 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
         <tr><td class="td-left">Sütőszóda-oldat</td><td>8,3</td><td><input class="answer-input" data-save="q6_t5" placeholder="…"></td></tr>
         <tr><td class="td-left">Háztartási lúg</td><td>13,0</td><td><input class="answer-input" data-save="q6_t6" placeholder="…"></td></tr>
       </table>
-      <div class="sub-question">a) Melyik oldat a legerősebb sav?</div>
-      <input type="text" class="answer-input" data-save="q6a" placeholder="Válasz…">
-      <div class="sub-question">b) Sorolj fel két lúgos kémhatású oldatot!</div>
+      <div class="sub-question">a) Töltsd ki a táblázat kémhatás oszlopát! (2p)</div>
+      <div class="sub-question">b) Melyik oldat a legerősebb sav? Miért? (1p)</div>
+      <input type="text" class="answer-input" data-save="q6a" placeholder="Válasz és indoklás…">
+      <div class="sub-question">c) Sorolj fel két lúgos kémhatású oldatot! (1p)</div>
       <input type="text" class="answer-input" data-save="q6b" placeholder="1. … és 2. …">
+      <div class="sub-question">d) Melyik a leglúgosabb oldat, és hányszor „erősebb" lúg, mint a szappan? (1p)</div>
+      <input type="text" class="answer-input" data-save="q6d" placeholder="Válasz…">
     </div>
   </div>
 </div>
@@ -639,8 +643,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
 ══════════════════════════════════ -->
 <div class="part-header">
   <div class="part-badge medium">II. Rész</div>
-  <div class="part-title">Közepes feladatok</div>
-  <div class="part-info">9–14. feladat · 19 pont</div>
+  <div class="part-info">9–14. feladat · 23 pont</div>
 </div>
 
 <!-- 9 -->
@@ -648,7 +651,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <div class="task-header">
     <div class="task-num medium">9</div>
     <div class="task-body">
-      <div class="task-tags"><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">3 pont</span></div>
+      <div class="task-tags"><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">5 pont</span></div>
       <div class="question">Az alábbi táblázat különböző anyagok sűrűségét tartalmazza 20 °C-on.</div>
       <table>
         <tr><th>Anyag</th><th>Sűrűség (g/cm³)</th><th>Halmazállapot</th></tr>
@@ -661,8 +664,8 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
       </table>
       <div class="sub-question">a) Melyik szilárd anyag úszik a víz felszínén? Indokold! <em>(1p)</em></div>
       <textarea class="answer-input" data-save="q9a" placeholder="Válasz és indoklás…"></textarea>
-      <div class="sub-question">b) Ha egy 200 cm³ térfogatú alumínium tömböt vízbe helyezünk, mekkora a rá ható felhajtóerő? (g = 10 N/kg) <em>(1p)</em></div>
-      <textarea class="answer-input" data-save="q9b" placeholder="Számítás és eredmény…"></textarea>
+      <div class="sub-question">b) Ha egy 200 cm³ térfogatú alumínium tömböt vízbe helyezünk, mekkora a rá ható felhajtóerő? <em>(3p)</em><br>Képlet: <strong>F<sub>felh</sub> = ρ<sub>folyadék</sub> × V<sub>test</sub> × g</strong> &nbsp;·&nbsp; ρ<sub>víz</sub> = 1 g/cm³ = 1000 kg/m³, V = 200 cm³ = 0,0002 m³, g = 10 m/s²</div>
+      <textarea class="answer-input" data-save="q9b" placeholder="Képlet felírása… Behelyettesítés… Eredmény…" style="min-height:70px;"></textarea>
       <div class="sub-question">c) Mi történik, ha étolajat öntünk vízre? Melyik anyag lesz felül? Miért? <em>(1p)</em></div>
       <textarea class="answer-input" data-save="q9c" placeholder="Válasz és magyarázat…"></textarea>
     </div>
@@ -771,8 +774,10 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <div class="task-header">
     <div class="task-num medium">13</div>
     <div class="task-body">
-      <div class="task-tags"><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-bio">Biológia</span><span class="tag tag-pont">3 pont</span></div>
-      <div class="question">Az alábbi táblázat anyagok hővezető képességét mutatja.</div>
+      <div class="task-tags"><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-bio">Biológia</span><span class="tag tag-pont">5 pont</span></div>
+      <div class="question">Az alábbi táblázat anyagok hővezető képességét mutatja. Töltsd ki az utolsó oszlopot, majd válaszolj!</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A hővezető képesség (W/m·K) azt mutatja, milyen gyorsan vezeti az anyag a hőt. <strong>Jó hővezető</strong> az anyag, ha értéke nagy (pl. fémek: &gt;10 W/m·K) – gyorsan továbbítja a hőt. <strong>Rossz hővezető (hőszigetelő)</strong> az anyag, ha értéke kicsi (pl. &lt;1 W/m·K) – lassítja a hőveszteséget. Az emberi szervezet hőszigetelésében a zsírszövet és a ruházat anyaga döntő szerepet játszik.</div>
+      
       <table>
         <tr><th>Anyag</th><th>Hővezető képesség (W/m·K)</th><th>Jó / rossz hővezető?</th></tr>
         <tr><td class="td-left">Réz</td><td>385</td><td><input class="answer-input" data-save="q13_t1" placeholder="…"></td></tr>
@@ -781,10 +786,13 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
         <tr><td class="td-left">Levegő (álló)</td><td>0,025</td><td><input class="answer-input" data-save="q13_t4" placeholder="…"></td></tr>
         <tr><td class="td-left">Emberi zsírszövet</td><td>0,18</td><td><input class="answer-input" data-save="q13_t5" placeholder="…"></td></tr>
       </table>
-      <div class="sub-question">b) Miért viseljük télen a gyapjúruhát, és miért hatékony a zsírszövet mint hőszigetelő? <em>(1p)</em></div>
+      <div class="sub-question">a) Töltsd ki a táblázat utolsó oszlopát! (1p)</div>
+      <div class="sub-question">b) Miért viseljük télen a gyapjúruhát, és miért hatékony a zsírszövet mint hőszigetelő? <em>(2p)</em></div>
       <textarea class="answer-input" data-save="q13b" placeholder="Magyarázat…"></textarea>
       <div class="sub-question">c) Miért érezzük hidegebbnek a fém kilincset, mint a fa ajtófélfát, ha mindkettő azonos hőmérsékletű? <em>(1p)</em></div>
       <textarea class="answer-input" data-save="q13c" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Melyik anyag lenne a legjobb télikabát bélés az adatok alapján, és miért? <em>(1p)</em></div>
+      <textarea class="answer-input" data-save="q13d" placeholder="Válasz és indoklás…"></textarea>
     </div>
   </div>
 </div>
@@ -796,6 +804,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-kemia">Kémia</span><span class="tag tag-bio">Biológia</span><span class="tag tag-fold">Földrajz</span><span class="tag tag-pont">3 pont</span></div>
       <div class="question">A talaj pH-ja meghatározza, hogy milyen növények telepedhetnek meg rajta.</div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong> A talaj pH-ját <strong>meszezéssel lehet növelni</strong> (pl. mészkő – CaCO₃, oltott mész – Ca(OH)₂), mivel ezek lúgos kémhatásúak. A pH-t <strong>savanyítással lehet csökkenteni</strong> (kéntartalmú anyagok, tőzeg hozzáadásával). A savas eső (pH &lt; 5,6) savasítja a talajt és rontja a termőképességét.</div>
       <figure class="figure">
         <svg viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;font-family:'Source Serif 4',serif;font-size:9px;">
           <rect width="480" height="110" fill="#fafaf5" rx="4"/>
@@ -836,7 +845,6 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
 ══════════════════════════════════ -->
 <div class="part-header">
   <div class="part-badge hard">III. Rész</div>
-  <div class="part-title">Nehéz, komplex feladatok</div>
   <div class="part-info">15–20. feladat · 30 pont</div>
 </div>
 
@@ -847,6 +855,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-fold">Földrajz</span><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-bio">Biológia</span><span class="tag tag-pont">5 pont</span></div>
       <div class="question"><strong>A víz körforgása</strong></div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A víz körforgása a Föld vízének folyamatos mozgása a légkör, a felszín és a felszín alatti rétegek között. A <strong>transzspiráció</strong> során a növények gyökerükkel felveszik a talajvizet, és levelük sztómáin keresztül vízgőzként párologtatják el a légkörbe. Egy nagy fa naponta akár 400 liter vizet is párologtat – ezzel az erdők jelentősen hozzájárulnak a helyi csapadékhoz és a légkör hűtéséhez. Az erdőirtás csökkenti a transzspirációt, ami kevesebb csapadékhoz és fokozottabb árvízveszélyhez vezet.</div>
       <figure class="figure">
         <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;font-family:'Source Serif 4',serif;font-size:9px;">
           <defs>
@@ -951,6 +960,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-bio">Biológia</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-fizika">Fizika</span><span class="tag tag-pont">5 pont</span></div>
       <div class="question"><strong>Anyagcsere és energiaháztartás</strong></div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong><br>• A <strong>zsír</strong> a szervezet leghatékonyabb energiatartaléka – molekuláiban sok C–H kötés és kevés oxigén van, ezért égésük több energiát szabadít fel.<br>• A <strong>mitokondrium</strong> a sejt kettős membránnal körülvett szervecskéje, ahol a sejtes légzés zajlik és ATP (adenozin-trifoszfát) keletkezik – ez az energia „pénzneme" a sejtben.<br>• Intenzív mozgásnál az izmok <strong>anaerob</strong> (oxigén nélküli) légzéssel is termelnek energiát; mellékterméke a <strong>tejsav</strong>, amely felhalmozódva égő, fájdalmas izomfáradtságot okoz.</div>
       <table>
         <tr><th>Tápanyag</th><th>Energiatartalom (kJ/g)</th><th>Fő szerepe</th></tr>
         <tr><td class="td-left">Szénhidrát</td><td>17</td><td>energiaforrás</td></tr>
@@ -979,6 +989,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-fold">Földrajz</span><span class="tag tag-bio">Biológia</span><span class="tag tag-pont">5 pont</span></div>
       <div class="question"><strong>Energiaforrások összehasonlítása</strong></div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ a vízerőmű gátakról:</strong> A folyami gátak megújuló energiát termelnek, de ökológiai hatásaik is vannak: elvágják a vándorló halak (pl. lazac, tokhal) útvonalát; megakadályozzák a hordalék szállítását; területeket árasztanak el; megváltoztatják a víz hőmérsékletét és oxigéntartalmát, ami az egész folyó ökoszisztémáját érinti.</div>
       <figure class="figure">
         <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;font-family:'Source Serif 4',serif;font-size:9px;">
           <rect width="480" height="190" fill="#fafaf5" rx="4"/>
@@ -1033,6 +1044,7 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
     <div class="task-body">
       <div class="task-tags"><span class="tag tag-fold">Földrajz</span><span class="tag tag-fizika">Fizika</span><span class="tag tag-kemia">Kémia</span><span class="tag tag-pont">5 pont</span></div>
       <div class="question"><strong>A Föld belső szerkezete és a kőzetciklus</strong></div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong><br>• A <strong>hőmérséklet</strong> a mélységgel nő (radioaktív bomlás + keletkezéskori hő): belső mag ~5000 °C. A <strong>nyomás</strong> is nő – a felette lévő kőzetek súlyából adódik.<br>• A <strong>kontinentális kéreg</strong> gránitos, sűrűsége ~2,7 g/cm³, vastagsága 30–70 km. Az <strong>óceáni kéreg</strong> bazaltos, sűrűbb (~3,0 g/cm³), csak 5–10 km vastag. Ütközéskor az óceáni bukik le a kontinentális alá (szubdukció).</div>
       <figure class="figure">
         <svg viewBox="0 0 590 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;font-family:serif;font-size:11px;">
           <defs>
@@ -1152,10 +1164,10 @@ td input.answer-input:focus { border-bottom-color: var(--accent); }
   <h3>Pontösszesítő (javítónak)</h3>
   <table>
     <tr><th>Rész</th><th>Feladatok</th><th>Max. pont</th><th>Elért pont</th></tr>
-    <tr><td>I. Könnyű</td><td>1–8</td><td>11</td><td></td></tr>
-    <tr><td>II. Közepes</td><td>9–14</td><td>19</td><td></td></tr>
-    <tr><td>III. Nehéz</td><td>15–20</td><td>30</td><td></td></tr>
-    <tr style="background:#ffe;"><td colspan="2"><strong>ÖSSZESEN</strong></td><td><strong>60</strong></td><td></td></tr>
+    <tr><td>I. Rész</td><td>1–8</td><td>15</td><td></td></tr>
+    <tr><td>II. Rész</td><td>9–14</td><td>23</td><td></td></tr>
+    <tr><td>III. Rész</td><td>15–20</td><td>30</td><td></td></tr>
+    <tr style="background:#ffe;"><td colspan="2"><strong>ÖSSZESEN</strong></td><td><strong>68</strong></td><td></td></tr>
   </table>
 </div>
 
