@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komplex Természettudományos Verseny – 7–8. évfolyam</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+:root {
+  --ink: #1a1a2e;
+  --paper: #faf8f2;
+  --accent: #c0392b;
+  --gold: #b8860b;
+  --blue: #1a5276;
+  --green: #1a6b4a;
+  --mid-gray: #555566;
+  --light-gray: #e8e4d8;
+  --border: #c8bfa8;
+  --saved: #27ae60;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: #d4cfc4;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.65;
+}
+
+.page {
+  max-width: 820px;
+  margin: 20px auto;
+  background: var(--paper);
+  padding: 40px 52px 52px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.22);
+  border-top: 6px solid var(--accent);
+}
+
+/* ── STICKY TOOLBAR ── */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: -40px -52px 30px;
+}
+.toolbar-title { font-family: 'Playfair Display', serif; font-size: 11pt; opacity: 0.85; }
+.toolbar-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 9pt;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+.btn-save   { background: var(--saved); color: white; }
+.btn-submit { background: #8e44ad; color: white; }
+.save-status {
+  font-size: 9pt;
+  color: #a8e6b8;
+  font-style: italic;
+  white-space: nowrap;
+}
+.progress-bar-wrap {
+  width: 100%;
+  background: rgba(255,255,255,0.2);
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 6px;
+}
+.progress-bar {
+  height: 4px;
+  background: #f1c40f;
+  border-radius: 2px;
+  transition: width 0.3s;
+  width: 0%;
+}
+
+/* ── FEJLÉC ── */
+.header {
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.header .institution {
+  font-size: 9pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-bottom: 6px;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20pt;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 12pt;
+  font-weight: 400;
+  color: var(--accent);
+  margin-top: 4px;
+}
+.meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 12px;
+  font-size: 9.5pt;
+  color: var(--mid-gray);
+  flex-wrap: wrap;
+}
+.meta-row strong { color: var(--ink); }
+
+/* ── VERSENYZŐ ADATAI ── */
+.contestant-box {
+  border: 1.5px solid var(--border);
+  background: #f5f2e9;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.field-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10pt;
+}
+.field-line label { white-space: nowrap; color: var(--mid-gray); font-size: 9pt; font-weight: 600; }
+.field-line input[type="text"] {
+  flex: 1;
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+  background: transparent;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10.5pt;
+  color: var(--ink);
+  padding: 2px 4px;
+  outline: none;
+}
+.field-line input[type="text"]:focus { border-bottom-color: var(--accent); }
+
+/* ── ÚTMUTATÓ ── */
+.guide-box {
+  background: #eef4fb;
+  border-left: 4px solid var(--blue);
+  padding: 12px 16px;
+  margin-bottom: 26px;
+  font-size: 9.5pt;
+  color: #1a3a5c;
+}
+.guide-box ul { padding-left: 18px; margin-top: 6px; }
+.guide-box li { margin-bottom: 3px; }
+
+/* ── RÉSZEK ── */
+
+/* ── FELADATOK ── */
+.task {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--border);
+}
+.task:last-child { border-bottom: none; }
+.task-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.task-num {
+  background: var(--ink); color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 11pt; font-weight: 700;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.task-num.medium { background: var(--blue); }
+.task-num.hard { background: var(--green); }
+.task-body { flex: 1; }
+
+.question { font-size: 10.5pt; margin-bottom: 8px; }
+
+/* ── FELELETVÁLASZTÓS ── */
+.choices { list-style: none; padding: 0; margin: 8px 0 4px; }
+.choices li { margin-bottom: 5px; }
+.choices li label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 10.5pt;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+.choices li label:hover { background: #f0ece0; }
+.choices li input[type="radio"] { margin-top: 3px; accent-color: var(--accent); flex-shrink: 0; }
+.choice-badge {
+  background: var(--light-gray);
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9pt; font-weight: 700; border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── INPUT MEZŐK ── */
+.answer-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: white;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10.5pt;
+  color: var(--ink);
+  padding: 6px 10px;
+  margin: 5px 0;
+  outline: none;
+  resize: vertical;
+  border-radius: 2px;
+  transition: border-color 0.15s;
+}
+.answer-input:focus { border-color: var(--accent); }
+textarea.answer-input { min-height: 64px; }
+input.answer-input { min-height: 36px; }
+
+.inline-input {
+  display: inline-block;
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+  background: transparent;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10.5pt;
+  color: var(--ink);
+  padding: 2px 6px;
+  outline: none;
+  min-width: 80px;
+  width: 120px;
+}
+.inline-input:focus { border-bottom-color: var(--accent); }
+.inline-input.wide { width: 200px; }
+.inline-input.short { width: 50px; }
+
+/* ── TÁBLÁZATOK ── */
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt; }
+th {
+  background: var(--ink); color: white;
+  padding: 6px 10px; text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400; letter-spacing: 0.03em;
+}
+td { border: 1px solid var(--border); padding: 5px 8px; text-align: center; background: white; }
+tr:nth-child(even) td { background: #f8f5ee; }
+.td-left { text-align: left; }
+td input.answer-input { margin: 0; border: none; border-bottom: 1px solid var(--border); background: transparent; font-size: 9.5pt; width: 100%; min-height: 28px; border-radius: 0; padding: 2px 4px; }
+td input.answer-input:focus { border-bottom-color: var(--accent); }
+
+/* ── PÁROSÍTÓS ── */
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; margin: 8px 0; }
+.match-col { font-size: 10pt; }
+.match-item { padding: 3px 0; }
+.match-inputs { display: flex; gap: 12px; margin-top: 6px; font-size: 10pt; flex-wrap: wrap; }
+.match-inputs span { display: flex; align-items: center; gap: 4px; }
+
+/* ── SVG ÁBRÁK ── */
+.figure { margin: 12px 0; text-align: center; }
+.figure figcaption { font-size: 8.5pt; color: var(--mid-gray); font-style: italic; margin-top: 4px; }
+
+/* ── TÁPLÁLÉKEGYENLET ── */
+.equation-box {
+  text-align: center;
+  font-size: 11pt;
+  margin: 10px 0;
+  background: #f0f8f4;
+  padding: 10px;
+  border: 1px solid #b0ddc4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ── PONTÖSSZESÍTŐ ── */
+.score-summary {
+  border: 2px solid var(--border);
+  padding: 14px 20px;
+  margin-top: 30px;
+  background: #f5f2e9;
+}
+.score-summary h3 { font-family: 'Playfair Display', serif; font-size: 11pt; margin-bottom: 10px; }
+.score-summary table th { background: var(--gold); }
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; padding: 1.5cm 2cm; }
+  .toolbar { display: none; }
+  #submitModal { display: none !important; }
+  .choices li label:hover { background: none; }
+  /* Elrejtjük az input/textarea mezőket nyomtatáskor */
+  input.answer-input, textarea.answer-input,
+  input.inline-input, td input.answer-input { display: none !important; }
+  /* Megjelenítjük a kitöltött értékeket */
+  .print-value {
+    display: block !important;
+    font-family: Georgia, serif;
+    font-size: 10.5pt;
+    color: #1a1a2e;
+    border-bottom: 1px solid #c8bfa8;
+    min-height: 18px;
+    padding: 2px 4px;
+    margin: 4px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .print-value.inline { display: inline-block !important; min-width: 80px; }
+  .print-value.table-val { display: block !important; font-size: 9.5pt; }
+  /* Rádiógomboknál a kiválasztott opció kiemelve */
+  .choices li label { opacity: 0.4; }
+  .choices li.selected label { opacity: 1; font-weight: bold; }
+  .choices li.selected label::before { content: "✓ "; color: #1a5276; }
+  /* Oldaltörés védelme */
+  .task { page-break-inside: avoid; }
+  .figure { page-break-inside: avoid; }
+}
+
+/* ── SAVED FLASH ── */
+@keyframes savedFlash {
+  0% { background: #27ae60; }
+  100% { background: var(--ink); }
+}
+
+/* Segédszövegek */
+.hint { font-size: 9pt; color: var(--mid-gray); font-style: italic; margin-top: 2px; }
+.sub-question { margin: 8px 0 4px; font-size: 10.5pt; }
+
+.formula-box {
+  text-align: center;
+  background: #f0f8f4;
+  padding: 8px;
+  border: 1px solid #b0ddc4;
+  margin: 6px 0;
+  font-size: 11pt;
+}
+
+.reading-box {
+  background: #f9f4e8;
+  border: 1px solid #d4c090;
+  padding: 12px 14px;
+  margin: 8px 0;
+  font-size: 10pt;
+  border-left: 4px solid var(--gold);
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+<!-- ══ TOOLBAR ══ -->
+<div class="toolbar">
+  <div class="toolbar-title">🔬 Csodát virágzik a jelen – Természettudományos verseny · 2025/2026</div>
+  <div class="toolbar-btns">
+    <button class="btn btn-save" onclick="saveAnswers()">💾 Mentés</button>
+    <button class="btn btn-submit" onclick="openSubmitModal()">📤 Beküldés</button>
+  </div>
+  <div class="save-status" id="saveStatus"></div>
+  <div class="progress-bar-wrap" style="flex-basis:100%">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
+<!-- ══ FEJLÉC ══ -->
+<header class="header">
+  <div class="institution">Természettudományos Verseny · 2025/2026</div>
+  <h1>Csodát virágzik a jelen</h1>
+  <h2>Természettudományos verseny · 7–8. évfolyam · Egyéni verseny</h2>
+  <div class="meta-row">
+    <span>⏱ Megoldási idő: <strong>60 perc</strong></span>
+    <span>📋 Feladatok: <strong>20</strong></span>
+    <span>🏆 Max. pontszám: <strong>81 pont</strong></span>
+  </div>
+</header>
+
+<!-- Versenyző adatai -->
+<div class="contestant-box">
+  <div class="field-line">
+    <label for="nev">Versenyző neve:</label>
+    <input type="text" id="nev" data-save="nev" placeholder="Teljes név…">
+  </div>
+  <div class="field-line">
+    <label for="evf">Évfolyam/osztály:</label>
+    <input type="text" id="evf" data-save="evf" placeholder="pl. 7.b">
+  </div>
+  <div class="field-line">
+    <label for="iskola">Iskola neve:</label>
+    <input type="text" id="iskola" data-save="iskola" placeholder="Iskola neve…">
+  </div>
+  <div class="field-line">
+    <label>Dátum:</label>
+    <input type="text" id="datum" data-save="datum" placeholder="pl. 2025. március 15.">
+  </div>
+</div>
+
+<!-- Útmutató -->
+<div class="guide-box">
+  <strong>Útmutató a versenyzőknek:</strong>
+  <ul>
+    <li>Olvasd el figyelmesen minden feladat szövegét, mielőtt válaszolsz!</li>
+    <li>A feleletválasztós feladatoknál <strong>csak egy</strong> választ jelölj be!</li>
+    <li>A <strong>💾 Mentés</strong> gomb elmenti a válaszaidat a böngészőben – de ne zárd be az oldalt az elmentés előtt!</li>
+    <li>Megoldás után ne felejtsd el megnyomni a <strong>📤 Beküldés</strong> gombot, hogy megkapjuk a válaszaidat!</li>
+    <li>A feladatok <strong>kompetenciamérés jellegűek</strong> – a válaszok nagy része megtalálható a kérdésekben vagy egy másik feladatban. Ezért <strong>figyelmesen olvass</strong>, és csak ezután old meg a feladatokat!</li>
+  </ul>
+</div>
+
+
+<!-- ══════════════════════════════════
+     I. RÉSZ – KÖNNYŰ
+══════════════════════════════════ -->
+
+<!-- 1 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">1</div>
+    <div class="task-body">
+      <div class="question">Melyik sejtszervecske végzi a növényi sejt <em>fotoszintézisét</em>?</div>
+      <ul class="choices">
+        <li><label><input type="radio" name="q1" value="A" data-save="q1"><span class="choice-badge">A</span> Mitokondrium</label></li>
+        <li><label><input type="radio" name="q1" value="B" data-save="q1"><span class="choice-badge">B</span> Sejtmag</label></li>
+        <li><label><input type="radio" name="q1" value="C" data-save="q1"><span class="choice-badge">C</span> Kloroplaszt</label></li>
+        <li><label><input type="radio" name="q1" value="D" data-save="q1"><span class="choice-badge">D</span> Vakuólum</label></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">2</div>
+    <div class="task-body">
+      <div class="question">A periódusos rendszerben melyik jelölés tartozik a <strong>nátrium</strong> elemhez?</div>
+      <ul class="choices">
+        <li><label><input type="radio" name="q2" value="A" data-save="q2"><span class="choice-badge">A</span> N</label></li>
+        <li><label><input type="radio" name="q2" value="B" data-save="q2"><span class="choice-badge">B</span> Na</label></li>
+        <li><label><input type="radio" name="q2" value="C" data-save="q2"><span class="choice-badge">C</span> Ni</label></li>
+        <li><label><input type="radio" name="q2" value="D" data-save="q2"><span class="choice-badge">D</span> Nb</label></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">3</div>
+    <div class="task-body">
+      <div class="question">Kösd össze a fizikai mennyiségeket a megfelelő SI-mértékegységükkel! (Írd a betűt a szám mellé!)</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <div class="match-item">1. Erő</div>
+          <div class="match-item">2. Nyomás</div>
+          <div class="match-item">3. Energia / Munka</div>
+          <div class="match-item">4. Teljesítmény</div>
+        </div>
+        <div class="match-col">
+          <div class="match-item">A. Joule (J)</div>
+          <div class="match-item">B. Watt (W)</div>
+          <div class="match-item">C. Newton (N)</div>
+          <div class="match-item">D. Pascal (Pa)</div>
+        </div>
+      </div>
+      <div class="match-inputs">
+        <span>1 – <input type="text" class="inline-input short" data-save="q3_1" placeholder="?"></span>
+        <span>2 – <input type="text" class="inline-input short" data-save="q3_2" placeholder="?"></span>
+        <span>3 – <input type="text" class="inline-input short" data-save="q3_3" placeholder="?"></span>
+        <span>4 – <input type="text" class="inline-input short" data-save="q3_4" placeholder="?"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">4</div>
+    <div class="task-body">
+      <div class="question">Az alábbi ábra a Föld légkörének rétegeit mutatja. Írd be a megfelelő réteg nevét!</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A Föld légköre több rétegre tagolódik. A <strong>troposzféra</strong> (0–12 km) tartalmazza a levegő nagy részét és itt zajlanak az időjárási folyamatok. A <strong>sztratoszféra</strong> (12–50 km) tartalmazza az ózonréteget, amely elnyeli az UV-sugárzást. A <strong>mezoszféra</strong> (50–80 km) felett helyezkedik el a <strong>termoszféra</strong>, ahol az ionizált részecskék az északi fény jelenségét okozzák.</div>
+      <figure class="figure">
+        <svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;font-family:'Source Serif 4',serif;">
+          <defs>
+            <linearGradient id="atm" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#08004a"/>
+              <stop offset="25%" stop-color="#1a3a7c"/>
+              <stop offset="55%" stop-color="#3a7abf"/>
+              <stop offset="80%" stop-color="#6fb3e0"/>
+              <stop offset="100%" stop-color="#b8dff5"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="240" fill="url(#atm)" rx="4"/>
+          <line x1="140" y1="200" x2="300" y2="200" stroke="white" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+          <line x1="140" y1="148" x2="300" y2="148" stroke="white" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+          <line x1="140" y1="90"  x2="300" y2="90"  stroke="white" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+          <line x1="140" y1="40"  x2="300" y2="40"  stroke="white" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+          <text x="305" y="204" fill="white" font-size="8" opacity="0.8">0 km</text>
+          <text x="305" y="152" fill="white" font-size="8" opacity="0.8">12 km</text>
+          <text x="305" y="94"  fill="white" font-size="8" opacity="0.8">50 km</text>
+          <text x="305" y="44"  fill="white" font-size="8" opacity="0.8">80 km</text>
+          <rect x="12" y="188" width="120" height="22" fill="white" fill-opacity="0.15" rx="2"/>
+          <text x="72" y="202" fill="white" font-size="9" text-anchor="middle" font-style="italic">Troposzféra</text>
+          <rect x="12" y="130" width="120" height="22" fill="white" fill-opacity="0.2" rx="2"/>
+          <text x="72" y="144" fill="#ffe066" font-size="10" text-anchor="middle" font-weight="bold">?  (A)</text>
+          <rect x="12" y="60" width="120" height="22" fill="white" fill-opacity="0.15" rx="2"/>
+          <text x="72" y="74" fill="white" font-size="9" text-anchor="middle" font-style="italic">Mezoszféra</text>
+          <rect x="12" y="12" width="120" height="22" fill="white" fill-opacity="0.2" rx="2"/>
+          <text x="72" y="26" fill="#ffe066" font-size="10" text-anchor="middle" font-weight="bold">?  (B)</text>
+          <text x="220" y="128" fill="#ffe066" font-size="8.5" text-anchor="middle">☀ ózonréteg</text>
+        </svg>
+        <figcaption>1. ábra – A Föld légkörének rétegei</figcaption>
+      </figure>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:8px;">
+        <div><strong>(A)</strong> réteg neve: <input type="text" class="inline-input wide" data-save="q4_A" placeholder="Réteg neve…"></div>
+        <div><strong>(B)</strong> réteg neve: <input type="text" class="inline-input wide" data-save="q4_B" placeholder="Réteg neve…"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">5</div>
+    <div class="task-body">
+      <div class="question">Egészítsd ki a fotoszintézis összefoglaló egyenletét a hiányzó anyagokkal! (Mindkét anyag megnevezése szükséges.)</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A <strong>fotoszintézis</strong> a zöld növények, algák és néhány baktérium alapvető életfolyamata, amelynek során fényenergia segítségével szervetlen anyagokból (CO₂ és H₂O) szerves anyagot (glükózt) és oxigént állítanak elő. A folyamat a <strong>kloroplasztiszokban</strong> zajlik, amelyekben klorofill pigment található. A fotoszintézis nemcsak a növények tápanyagát biztosítja, hanem a légkör oxigénkészletét is fenntartja.</div>
+      
+      <div class="equation-box">
+        6 CO₂ &nbsp;+&nbsp;
+        <input type="text" class="inline-input short" data-save="q5_1" placeholder="??" style="text-align:center;">
+        &nbsp;
+        <svg viewBox="0 0 60 24" style="vertical-align:middle;width:60px;height:24px;"><line x1="0" y1="12" x2="50" y2="12" stroke="#1a6b4a" stroke-width="1.5"/><polygon points="50,7 60,12 50,17" fill="#1a6b4a"/><text x="30" y="9" font-size="9" fill="#1a6b4a" text-anchor="middle">fény</text></svg>
+        &nbsp;
+        C₆H₁₂O₆ &nbsp;+&nbsp;
+        <input type="text" class="inline-input short" data-save="q5_2" placeholder="??" style="text-align:center;">
+      </div>
+      <div class="hint">Segítség: az anyagok összegképleteit add meg!</div>
+    </div>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">6</div>
+    <div class="task-body">
+      <div class="question">Az alábbi táblázat különböző oldatok pH-értékét tartalmazza. Töltsd ki a kémhatás oszlopot, majd válaszolj! <strong>Emlékeztető:</strong> pH &lt; 7 = savas, pH = 7 = semleges, pH &gt; 7 = lúgos. Minél kisebb a pH, annál erősebb a sav; minél nagyobb, annál erősebb a lúg.</div>
+      <table>
+        <tr><th>Oldat</th><th>pH-érték</th><th>Kémhatás (savas/semleges/lúgos)</th></tr>
+        <tr><td class="td-left">Gyomorsav</td><td>1,5</td><td><input class="answer-input" data-save="q6_t1" placeholder="…"></td></tr>
+        <tr><td class="td-left">Citromlé</td><td>2,5</td><td><input class="answer-input" data-save="q6_t2" placeholder="…"></td></tr>
+        <tr><td class="td-left">Tiszta víz</td><td>7,0</td><td><input class="answer-input" data-save="q6_t3" placeholder="…"></td></tr>
+        <tr><td class="td-left">Szappan</td><td>9,5</td><td><input class="answer-input" data-save="q6_t4" placeholder="…"></td></tr>
+        <tr><td class="td-left">Sütőszóda-oldat</td><td>8,3</td><td><input class="answer-input" data-save="q6_t5" placeholder="…"></td></tr>
+        <tr><td class="td-left">Háztartási lúg</td><td>13,0</td><td><input class="answer-input" data-save="q6_t6" placeholder="…"></td></tr>
+      </table>
+      <div class="sub-question">a) Töltsd ki a táblázat kémhatás oszlopát!</div>
+      <div class="sub-question">b) Melyik oldat a legerősebb sav? Miért?</div>
+      <input type="text" class="answer-input" data-save="q6a" placeholder="Válasz és indoklás…">
+      <div class="sub-question">c) Sorolj fel két lúgos kémhatású oldatot!</div>
+      <input type="text" class="answer-input" data-save="q6b" placeholder="1. … és 2. …">
+      <div class="sub-question">d) Melyik a leglúgosabb oldat, és hányszor „erősebb" lúg, mint a szappan?</div>
+      <input type="text" class="answer-input" data-save="q6d" placeholder="Válasz…">
+    </div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">7</div>
+    <div class="task-body">
+      <div class="question">Egy labda a földre esik, majd visszapattan. Esés közben milyen energiaátalakulás történik?</div>
+      <ul class="choices">
+        <li><label><input type="radio" name="q7" value="A" data-save="q7"><span class="choice-badge">A</span> Mozgási energia → helyzeti energia</label></li>
+        <li><label><input type="radio" name="q7" value="B" data-save="q7"><span class="choice-badge">B</span> Helyzeti energia → mozgási energia</label></li>
+        <li><label><input type="radio" name="q7" value="C" data-save="q7"><span class="choice-badge">C</span> Hőenergia → mozgási energia</label></li>
+        <li><label><input type="radio" name="q7" value="D" data-save="q7"><span class="choice-badge">D</span> Mozgási energia → elektromos energia</label></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 8 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num">8</div>
+    <div class="task-body">
+      <div class="question">Melyik állítás igaz Magyarország éghajlatára?</div>
+      <ul class="choices">
+        <li><label><input type="radio" name="q8" value="A" data-save="q8"><span class="choice-badge">A</span> Trópusi éghajlat jellemzi, egész évben meleg és nedves.</label></li>
+        <li><label><input type="radio" name="q8" value="B" data-save="q8"><span class="choice-badge">B</span> Mérsékelten kontinentális éghajlat jellemzi.</label></li>
+        <li><label><input type="radio" name="q8" value="C" data-save="q8"><span class="choice-badge">C</span> Sarkvidéki éghajlat, egész évben fagyos.</label></li>
+        <li><label><input type="radio" name="q8" value="D" data-save="q8"><span class="choice-badge">D</span> Mediterrán éghajlat, száraz, forró nyarral.</label></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     II. RÉSZ – KÖZEPES
+══════════════════════════════════ -->
+
+<!-- 9 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">9</div>
+    <div class="task-body">
+      <div class="question">Az alábbi táblázat különböző anyagok sűrűségét tartalmazza 20 °C-on.</div>
+      <table>
+        <tr><th>Anyag</th><th>Sűrűség (g/cm³)</th><th>Halmazállapot</th></tr>
+        <tr><td class="td-left">Vas</td><td>7,87</td><td>szilárd</td></tr>
+        <tr><td class="td-left">Alumínium</td><td>2,70</td><td>szilárd</td></tr>
+        <tr><td class="td-left">Víz</td><td>1,00</td><td>folyadék</td></tr>
+        <tr><td class="td-left">Étolaj</td><td>0,91</td><td>folyadék</td></tr>
+        <tr><td class="td-left">Fa (tölgy)</td><td>0,65</td><td>szilárd</td></tr>
+        <tr><td class="td-left">Levegő</td><td>0,0012</td><td>gáz</td></tr>
+      </table>
+      <div class="sub-question">a) Melyik szilárd anyag úszik a víz felszínén? Indokold! </div>
+      <textarea class="answer-input" data-save="q9a" placeholder="Válasz és indoklás…"></textarea>
+      <div class="sub-question">b) Ha egy 200 cm³ térfogatú alumínium tömböt vízbe helyezünk, mekkora a rá ható felhajtóerő?<br>A felhajtóerő kiszámításához használd az Arkhimédész-törvényt:<br><span style="white-space:nowrap;"><strong>F<sub>felh</sub> = ρ<sub>folyadék</sub> × V<sub>test</sub> × g</strong></span><br>Adatok: ρ<sub>víz</sub> = 1000 kg/m³ &nbsp;·&nbsp; V = 0,0002 m³ &nbsp;·&nbsp; g = 10 m/s²<br><em>Csak az eredményt írd be (egységgel együtt)!</em></div>
+      <textarea class="answer-input" data-save="q9b" placeholder="Eredmény: … N"></textarea>
+      <div class="sub-question">c) Mi történik, ha étolajat öntünk vízre? Melyik anyag lesz felül? Miért? </div>
+      <textarea class="answer-input" data-save="q9c" placeholder="Válasz és magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">10</div>
+    <div class="task-body">
+      <div class="question">Töltsd ki a hiányzó rovatokat, majd válaszolj a kérdésre!</div>
+      <table>
+        <tr><th>Éghajlat</th><th>Jellemző növényzet</th></tr>
+        <tr><td class="td-left">Egyenlítői</td><td><input class="answer-input" data-save="q10_A" placeholder="(A) …"></td></tr>
+        <tr><td class="td-left">Trópusi sivatagi</td><td>tüskés félsivatagi növények</td></tr>
+        <tr><td class="td-left">Óceáni</td><td><input class="answer-input" data-save="q10_B" placeholder="(B) …"></td></tr>
+        <tr><td class="td-left">Szubarktikus</td><td>tajga (tűlevelű erdők)</td></tr>
+        <tr><td class="td-left">Sarkvidéki</td><td><input class="answer-input" data-save="q10_C" placeholder="(C) …"></td></tr>
+      </table>
+      <div class="sub-question">Miért nincs magas, fás növényzet a sarkvidéken?</div>
+      <textarea class="answer-input" data-save="q10d" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">11</div>
+    <div class="task-body">
+      <div class="question">Töltsd ki a hiányzó rovatokat a sejtes légzés és az égés összehasonlításában!</div>
+      <table>
+        <tr><th>Tulajdonság</th><th>Sejtes légzés</th><th>Égés (pl. gyertya)</th></tr>
+        <tr><td class="td-left">Kiindulási anyagok</td><td>glükóz + oxigén</td><td>szénhidrogén + oxigén</td></tr>
+        <tr><td class="td-left">Végső termékek</td><td><input class="answer-input" data-save="q11_A" placeholder="(A) …"></td><td>CO₂ + H₂O</td></tr>
+        <tr><td class="td-left">Energiafelszabadulás módja</td><td>fokozatos (enzimek)</td><td><input class="answer-input" data-save="q11_B" placeholder="(B) …"></td></tr>
+        <tr><td class="td-left">Hőmérséklet</td><td>~37 °C</td><td><input class="answer-input" data-save="q11_C" placeholder="(C) …"></td></tr>
+        <tr><td class="td-left">Helyszín</td><td>mitokondrium</td><td>külső tér</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 12 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">12</div>
+    <div class="task-body">
+      <div class="question">Az alábbi grafikon egy magyarországi napelempark éves, havonkénti átlagos energiatermelését mutatja (MWh/nap).</div>
+      <figure class="figure">
+        <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;font-family:'Source Serif 4',serif;font-size:9px;">
+          <rect width="520" height="240" fill="#fafaf5" stroke="#c8bfa8" stroke-width="1"/>
+          <g stroke="#e0dbd0" stroke-width="0.7">
+            <line x1="56" y1="30" x2="490" y2="30"/><line x1="56" y1="64" x2="490" y2="64"/>
+            <line x1="56" y1="98" x2="490" y2="98"/><line x1="56" y1="132" x2="490" y2="132"/>
+            <line x1="56" y1="166" x2="490" y2="166"/><line x1="56" y1="200" x2="490" y2="200"/>
+          </g>
+          <line x1="56" y1="20" x2="56" y2="210" stroke="#1a1a2e" stroke-width="1.5"/>
+          <line x1="56" y1="200" x2="500" y2="200" stroke="#1a1a2e" stroke-width="1.5"/>
+          <g fill="#555" text-anchor="end" font-size="8.5">
+            <text x="50" y="204">0</text><text x="50" y="170">10</text>
+            <text x="50" y="136">20</text><text x="50" y="102">30</text>
+            <text x="50" y="68">40</text><text x="50" y="34">50</text>
+          </g>
+          <text x="12" y="120" fill="#1a5276" font-size="9" text-anchor="middle" transform="rotate(-90,12,120)">Energiatermelés (MWh/nap)</text>
+          <g fill="#1a5276" font-size="8.5" text-anchor="middle">
+            <text x="90" y="216">Jan</text><text x="125" y="216">Feb</text><text x="160" y="216">Már</text>
+            <text x="195" y="216">Ápr</text><text x="230" y="216">Máj</text><text x="265" y="216">Jún</text>
+            <text x="300" y="216">Júl</text><text x="335" y="216">Aug</text><text x="370" y="216">Szep</text>
+            <text x="405" y="216">Okt</text><text x="440" y="216">Nov</text><text x="475" y="216">Dec</text>
+          </g>
+          <g fill="#f0b429" opacity="0.85">
+            <rect x="77" y="173" width="26" height="27"/><rect x="112" y="166" width="26" height="34"/>
+            <rect x="147" y="139" width="26" height="61"/><rect x="182" y="105" width="26" height="95"/>
+            <rect x="217" y="71"  width="26" height="129"/><rect x="252" y="47" width="26" height="153"/>
+            <rect x="287" y="37"  width="26" height="163"/><rect x="322" y="50" width="26" height="150"/>
+            <rect x="357" y="84"  width="26" height="116"/><rect x="392" y="125" width="26" height="75"/>
+            <rect x="427" y="163" width="26" height="37"/><rect x="462" y="176" width="26" height="24"/>
+          </g>
+          <g font-size="8" text-anchor="middle" fill="#7a5500">
+            <text x="90" y="170">8</text><text x="125" y="163">10</text><text x="160" y="136">18</text>
+            <text x="195" y="102">28</text><text x="230" y="68">38</text><text x="265" y="44">45</text>
+            <text x="300" y="34">48</text><text x="335" y="47">44</text><text x="370" y="81">34</text>
+            <text x="405" y="122">22</text><text x="440" y="160">11</text><text x="475" y="173">7</text>
+          </g>
+          <text x="273" y="14" fill="#1a1a2e" font-size="10" text-anchor="middle" font-weight="bold">Napelempark havi energiatermelése – Magyarország</text>
+        </svg>
+        <figcaption>2. ábra – Havi átlagos energiatermelés (MWh/nap)</figcaption>
+      </figure>
+      <div class="sub-question">a) Melyik hónapban a legnagyobb az energiatermelés és mennyi az értéke? </div>
+      <input type="text" class="answer-input" data-save="q12a" placeholder="Hónap és érték…">
+      <div class="sub-question">b) Miért termel többet nyáron, mint télen? </div>
+      <textarea class="answer-input" data-save="q12b" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">c) Mennyi a júniusi és decemberi termelés különbsége? </div>
+      <input type="text" class="answer-input" data-save="q12c" placeholder="Számítás…">
+      <div class="sub-question">d) Melyik évszakban a legkevésbé hatékony? Milyen problémát okozhat? </div>
+      <textarea class="answer-input" data-save="q12d" placeholder="Válasz és magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">13</div>
+    <div class="task-body">
+      <div class="question">Az alábbi táblázat anyagok hővezető képességét mutatja. Töltsd ki az utolsó oszlopot, majd válaszolj!</div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A hővezető képesség (W/m·K) azt mutatja, milyen gyorsan vezeti az anyag a hőt. <strong>Jó hővezető</strong> az anyag, ha értéke nagy (pl. fémek: &gt;10 W/m·K) – gyorsan továbbítja a hőt. <strong>Rossz hővezető (hőszigetelő)</strong> az anyag, ha értéke kicsi (pl. &lt;1 W/m·K) – lassítja a hőveszteséget. Az emberi szervezet hőszigetelésében a zsírszövet és a ruházat anyaga döntő szerepet játszik.</div>
+      
+      <table>
+        <tr><th>Anyag</th><th>Hővezető képesség (W/m·K)</th><th>Jó / rossz hővezető?</th></tr>
+        <tr><td class="td-left">Réz</td><td>385</td><td><input class="answer-input" data-save="q13_t1" placeholder="…"></td></tr>
+        <tr><td class="td-left">Gyapjú</td><td>0,04</td><td><input class="answer-input" data-save="q13_t2" placeholder="…"></td></tr>
+        <tr><td class="td-left">Víz</td><td>0,60</td><td><input class="answer-input" data-save="q13_t3" placeholder="…"></td></tr>
+        <tr><td class="td-left">Levegő (álló)</td><td>0,025</td><td><input class="answer-input" data-save="q13_t4" placeholder="…"></td></tr>
+        <tr><td class="td-left">Emberi zsírszövet</td><td>0,18</td><td><input class="answer-input" data-save="q13_t5" placeholder="…"></td></tr>
+      </table>
+      <div class="sub-question">a) Töltsd ki a táblázat utolsó oszlopát!</div>
+      <div class="sub-question">b) Miért viseljük télen a gyapjúruhát, és miért hatékony a zsírszövet mint hőszigetelő? </div>
+      <textarea class="answer-input" data-save="q13b" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">c) Miért érezzük hidegebbnek a fém kilincset, mint a fa ajtófélfát, ha mindkettő azonos hőmérsékletű? </div>
+      <textarea class="answer-input" data-save="q13c" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Melyik anyag lenne a legjobb télikabát bélés az adatok alapján, és miért? </div>
+      <textarea class="answer-input" data-save="q13d" placeholder="Válasz és indoklás…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 14 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num medium">14</div>
+    <div class="task-body">
+      <div class="question">A talaj pH-ja meghatározza, hogy milyen növények telepedhetnek meg rajta.</div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong> A talaj pH-ját <strong>meszezéssel lehet növelni</strong> (pl. mészkő – CaCO₃, oltott mész – Ca(OH)₂), mivel ezek lúgos kémhatásúak. A pH-t <strong>savanyítással lehet csökkenteni</strong> (kéntartalmú anyagok, tőzeg hozzáadásával). A savas eső (pH &lt; 5,6) savasítja a talajt és rontja a termőképességét.</div>
+      <figure class="figure">
+        <svg viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;font-family:'Source Serif 4',serif;font-size:9px;">
+          <rect width="480" height="110" fill="#fafaf5" rx="4"/>
+          <defs><linearGradient id="phgrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e74c3c"/><stop offset="35%" stop-color="#f39c12"/><stop offset="50%" stop-color="#27ae60"/><stop offset="65%" stop-color="#2980b9"/><stop offset="100%" stop-color="#8e44ad"/></linearGradient></defs>
+          <rect x="30" y="28" width="420" height="18" fill="url(#phgrad)" rx="3"/>
+          <g fill="#1a1a2e" text-anchor="middle" font-size="8.5">
+            <text x="30" y="60">4</text><text x="100" y="60">5</text><text x="170" y="60">6</text>
+            <text x="240" y="60">7</text><text x="310" y="60">8</text><text x="380" y="60">9</text><text x="450" y="60">10</text>
+          </g>
+          <text x="240" y="72" fill="#555" font-size="8" text-anchor="middle">← savas · semleges · lúgos →</text>
+          <rect x="65" y="78" width="70" height="12" fill="#c0392b" opacity="0.7" rx="2"/>
+          <text x="100" y="87" fill="white" text-anchor="middle" font-size="8">Hangafélék</text>
+          <rect x="135" y="78" width="175" height="12" fill="#27ae60" opacity="0.7" rx="2"/>
+          <text x="222" y="87" fill="white" text-anchor="middle" font-size="8">Búza / gabona</text>
+          <rect x="205" y="92" width="175" height="12" fill="#2980b9" opacity="0.7" rx="2"/>
+          <text x="292" y="101" fill="white" text-anchor="middle" font-size="8">Lucerna</text>
+          <g stroke="#1a1a2e" stroke-width="0.8">
+            <line x1="30" y1="44" x2="30" y2="50"/><line x1="100" y1="44" x2="100" y2="50"/>
+            <line x1="170" y1="44" x2="170" y2="50"/><line x1="240" y1="44" x2="240" y2="50"/>
+            <line x1="310" y1="44" x2="310" y2="50"/><line x1="380" y1="44" x2="380" y2="50"/><line x1="450" y1="44" x2="450" y2="50"/>
+          </g>
+        </svg>
+        <figcaption>3. ábra – Növények optimális talaj pH-tartománya</figcaption>
+      </figure>
+      <div class="sub-question">a) Egy talaj pH-ja 5,0. Melyik növény termeszthető rajta sikeresen? </div>
+      <input type="text" class="answer-input" data-save="q14a" placeholder="Válasz…">
+      <div class="sub-question">b) Hogyan lehet egy savas talaj pH-ját megnövelni? Nevezz meg egy kémiai anyagot! </div>
+      <input type="text" class="answer-input" data-save="q14b" placeholder="Módszer és anyag neve…">
+      <div class="sub-question">c) Ha savas eső (pH 4,5) éri a búzaföldet, mi történik? </div>
+      <textarea class="answer-input" data-save="q14c" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     III. RÉSZ – NEHÉZ
+══════════════════════════════════ -->
+
+<!-- 15 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">15</div>
+    <div class="task-body">
+      <div class="question"><strong>A víz körforgása</strong></div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> A víz körforgása a Föld vízének folyamatos mozgása a légkör, a felszín és a felszín alatti rétegek között. A <strong>transzspiráció</strong> során a növények gyökerükkel felveszik a talajvizet, és levelük sztómáin keresztül vízgőzként párologtatják el a légkörbe. Egy nagy fa naponta akár 400 liter vizet is párologtat – ezzel az erdők jelentősen hozzájárulnak a helyi csapadékhoz és a légkör hűtéséhez. Az erdőirtás csökkenti a transzspirációt, ami kevesebb csapadékhoz és fokozottabb árvízveszélyhez vezet.<br> A <strong>kondenzáció</strong> során a vízgőz lehűlve visszaalakul folyékony vízzé – ez egy <strong>fizikai folyamat</strong>, amelynek során a víz kémiai összetétele (H₂O) nem változik. A kondenzáció hozza létre a felhőket, ködöt és a csapadékot.</div>
+      <figure class="figure">
+        <svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;font-family:'Source Serif 4',serif;font-size:11px;">
+          <defs>
+            <linearGradient id="skygrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d0ecff"/><stop offset="100%" stop-color="#f0f8ff"/></linearGradient>
+            <linearGradient id="earthgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8B6914"/><stop offset="100%" stop-color="#5a3e0a"/></linearGradient>
+            <marker id="arr" markerWidth="7" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1a5276"/></marker>
+          </defs>
+          <!-- Háttér -->
+          <rect width="560" height="250" fill="url(#skygrad)"/>
+          <rect x="0" y="188" width="560" height="62" fill="url(#earthgrad)"/>
+          <!-- Tenger -->
+          <ellipse cx="470" cy="192" rx="78" ry="20" fill="#2980b9" opacity="0.9"/>
+          <rect x="393" y="188" width="156" height="20" fill="#2980b9" opacity="0.9"/>
+          <text x="470" y="205" fill="white" font-size="12" text-anchor="middle" font-weight="bold">Tenger / tó</text>
+          <!-- Hegy -->
+          <polygon points="165,188 232,88 300,188" fill="#7a7060"/>
+          <polygon points="232,88 248,106 216,106" fill="white" opacity="0.85"/>
+          <!-- Felhők -->
+          <ellipse cx="310" cy="44" rx="55" ry="22" fill="white" stroke="#a0c8e8" stroke-width="1.5"/>
+          <ellipse cx="268" cy="51" rx="34" ry="16" fill="white" stroke="#a0c8e8" stroke-width="1.5"/>
+          <ellipse cx="354" cy="53" rx="30" ry="14" fill="white" stroke="#a0c8e8" stroke-width="1.5"/>
+          <!-- Felhők felirat – fehér háttéren -->
+          <rect x="282" y="35" width="58" height="18" fill="white" rx="2" opacity="0.85"/>
+          <text x="311" y="48" fill="#1a5276" font-size="12" text-anchor="middle" font-weight="bold">Felhők</text>
+
+          <!-- ① Párolgás nyíl -->
+          <path d="M453,168 Q400,88 338,60" stroke="#1a5276" stroke-width="2" fill="none" marker-end="url(#arr)" stroke-dasharray="5,3"/>
+          <!-- ① Párolgás felirat – fehér hátterű doboz -->
+          <rect x="378" y="96" width="96" height="20" fill="white" rx="3" opacity="0.88"/>
+          <text x="380" y="110" fill="#1a5276" font-size="12" font-weight="bold">① Párolgás</text>
+
+          <!-- ② Csapadék nyíl -->
+          <path d="M280,65 Q250,118 224,175" stroke="#2980b9" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+          <!-- ② Csapadék felirat -->
+          <rect x="190" y="112" width="98" height="20" fill="white" rx="3" opacity="0.88"/>
+          <text x="192" y="126" fill="#2980b9" font-size="12" font-weight="bold">② Csapadék</text>
+
+          <!-- ③ Lefolyás nyíl -->
+          <path d="M300,190 Q380,194 400,182" stroke="#2980b9" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+          <!-- ③ Lefolyás felirat -->
+          <rect x="315" y="174" width="88" height="20" fill="white" rx="3" opacity="0.88"/>
+          <text x="317" y="188" fill="#2980b9" font-size="12" font-weight="bold">③ Lefolyás</text>
+
+          <!-- ④ Beszivárgás nyíl -->
+          <path d="M210,190 L210,222" stroke="#8B6914" stroke-width="2" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+          <!-- ④ Beszivárgás felirat -->
+          <rect x="218" y="198" width="120" height="20" fill="#f5ead0" rx="3" opacity="0.92"/>
+          <text x="220" y="212" fill="#5a3e0a" font-size="12" font-weight="bold">④ Beszivárgás</text>
+
+          <!-- Fák -->
+          <rect x="104" y="163" width="9" height="25" fill="#5a3e0a"/>
+          <ellipse cx="108" cy="157" rx="14" ry="12" fill="#27ae60" opacity="0.85"/>
+          <rect x="122" y="167" width="7" height="21" fill="#5a3e0a"/>
+          <ellipse cx="126" cy="162" rx="11" ry="9" fill="#27ae60" opacity="0.85"/>
+
+          <!-- ⑤ Transzspiráció nyíl -->
+          <path d="M114,150 Q192,88 266,65" stroke="#27ae60" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+          <!-- ⑤ Transzspiráció felirat -->
+          <rect x="118" y="80" width="138" height="20" fill="white" rx="3" opacity="0.88"/>
+          <text x="120" y="94" fill="#1a6b4a" font-size="12" font-weight="bold">⑤ Transzspiráció</text>
+
+          <!-- Talajvíz felirat -->
+          <rect x="4" y="232" width="200" height="18" fill="#f5ead0" rx="2" opacity="0.85"/>
+          <text x="8" y="245" fill="#7a5500" font-size="11">Talajvíz / felszín alatti víz</text>
+        </svg>
+        <figcaption>4. ábra – A víz körforgásának vázlata</figcaption>
+      </figure>
+      <div class="sub-question">a) Mi a párolgás folyamata? Milyen fizikai feltétele van? </div>
+      <textarea class="answer-input" data-save="q15a" placeholder="Válasz…"></textarea>
+      <div class="sub-question">b) A felhőkben a vízgőz kondenzálódik. Változik-e a víz kémiai összetétele? Magyarázd! </div>
+      <textarea class="answer-input" data-save="q15b" placeholder="Válasz…"></textarea>
+      <div class="sub-question">c) Miért fontos a növények transzspirációja (⑤) a körforgásban? </div>
+      <textarea class="answer-input" data-save="q15c" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Az erdőirtás hogyan befolyásolja a víz körforgását? Sorolj fel két hatást! </div>
+      <textarea class="answer-input" data-save="q15d" placeholder="1. …  2. …"></textarea>
+      <div class="sub-question">e) Melyik folyamat biztosítja az ivóvízkészletek utánpótlódását? </div>
+      <textarea class="answer-input" data-save="q15e" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 16 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">16</div>
+    <div class="task-body">
+      <div class="question"><strong>Az üvegházhatás és az éghajlatváltozás</strong></div>
+      <figure class="figure">
+        <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;font-family:'Source Serif 4',serif;font-size:9px;">
+          <rect width="520" height="220" fill="#fafaf5" stroke="#c8bfa8" stroke-width="1"/>
+          <g stroke="#e0dbd0" stroke-width="0.7">
+            <line x1="60" y1="30" x2="500" y2="30"/><line x1="60" y1="62" x2="500" y2="62"/>
+            <line x1="60" y1="94" x2="500" y2="94"/><line x1="60" y1="126" x2="500" y2="126"/>
+            <line x1="60" y1="158" x2="500" y2="158"/><line x1="60" y1="190" x2="500" y2="190"/>
+          </g>
+          <line x1="60" y1="20" x2="60" y2="200" stroke="#1a1a2e" stroke-width="1.5"/>
+          <line x1="60" y1="190" x2="510" y2="190" stroke="#1a1a2e" stroke-width="1.5"/>
+          <g fill="#555" text-anchor="end" font-size="8.5">
+            <text x="54" y="194">300</text><text x="54" y="162">320</text><text x="54" y="130">340</text>
+            <text x="54" y="98">360</text><text x="54" y="66">380</text><text x="54" y="34">400</text>
+          </g>
+          <text x="14" y="110" fill="#c0392b" font-size="9" text-anchor="middle" transform="rotate(-90,14,110)">CO₂-koncentráció (ppm)</text>
+          <g fill="#1a1a2e" text-anchor="middle" font-size="8.5">
+            <text x="100" y="206">1960</text><text x="162" y="206">1970</text><text x="222" y="206">1980</text>
+            <text x="282" y="206">1990</text><text x="342" y="206">2000</text><text x="402" y="206">2010</text><text x="462" y="206">2020</text>
+          </g>
+          <polyline points="100,169 162,155 222,138 282,118 342,98 402,70 462,38" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round"/>
+          <g fill="#c0392b"><circle cx="100" cy="169" r="4"/><circle cx="162" cy="155" r="4"/><circle cx="222" cy="138" r="4"/><circle cx="282" cy="118" r="4"/><circle cx="342" cy="98" r="4"/><circle cx="402" cy="70" r="4"/><circle cx="462" cy="38" r="4"/></g>
+          <line x1="60" y1="177" x2="500" y2="177" stroke="#27ae60" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.7"/>
+          <text x="390" y="174" fill="#1a6b4a" font-size="8">← Ipari forr. előtti szint (~280 ppm)</text>
+          <text x="280" y="15" fill="#1a1a2e" font-size="10" text-anchor="middle" font-weight="bold">Légköri CO₂-szint változása (1960–2020)</text>
+        </svg>
+        <figcaption>5. ábra – Légköri CO₂-koncentráció változása</figcaption>
+      </figure>
+      <div class="sub-question">a) Milyen tendenciát mutat a grafikon? </div>
+      <input type="text" class="answer-input" data-save="q16a" placeholder="Válasz…">
+      <div class="sub-question">b) Sorolj fel két emberi tevékenységet, amely emeli a CO₂-szintet! </div>
+      <input type="text" class="answer-input" data-save="q16b" placeholder="1. … és 2. …">
+      <div class="sub-question">c) Mi az üvegházhatás fizikai lényege? </div>
+      <textarea class="answer-input" data-save="q16c" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Milyen hatással jár a Föld felmelegedése az élővilágra? (két hatás) </div>
+      <textarea class="answer-input" data-save="q16d" placeholder="1. …  2. …"></textarea>
+      <div class="sub-question">e) Miért nem tudja az erdők fotoszintézise kompenzálni az ipari CO₂-kibocsátást? </div>
+      <textarea class="answer-input" data-save="q16e" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 17 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">17</div>
+    <div class="task-body">
+      <div class="question"><strong>Anyagcsere és energiaháztartás</strong></div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong><br>• A <strong>zsír</strong> a szervezet leghatékonyabb energiatartaléka – molekuláiban sok C–H kötés és kevés oxigén van, ezért égésük több energiát szabadít fel.<br>• A <strong>mitokondrium</strong> a sejt kettős membránnal körülvett szervecskéje, ahol a sejtes légzés zajlik és ATP (adenozin-trifoszfát) keletkezik – ez az energia „pénzneme" a sejtben.<br>• Intenzív mozgásnál az izmok <strong>anaerob</strong> (oxigén nélküli) légzéssel is termelnek energiát; mellékterméke a <strong>tejsav</strong>, amely felhalmozódva égő, fájdalmas izomfáradtságot okoz.</div>
+      <table>
+        <tr><th>Tápanyag</th><th>Energiatartalom (kJ/g)</th><th>Fő szerepe</th></tr>
+        <tr><td class="td-left">Szénhidrát</td><td>17</td><td>energiaforrás</td></tr>
+        <tr><td class="td-left">Fehérje</td><td>17</td><td>építőanyag, enzimek</td></tr>
+        <tr><td class="td-left">Zsír</td><td>38</td><td>energiatartalék, hőszigetelés</td></tr>
+      </table>
+      <div class="sub-question">a) Egy tanuló 600 kJ energiát éget el tornán. Mennyi szénhidráttal pótolható ez? </div>
+      <textarea class="answer-input" data-save="q17a" placeholder="Számítás és eredmény…"></textarea>
+      <div class="sub-question">b) Miért tartalmaz a zsír több mint kétszer annyi energiát, mint azonos tömegű szénhidrát? </div>
+      <textarea class="answer-input" data-save="q17b" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">c) Mi a mitokondrium, és miért hívják az élet „erőmüvének"? </div>
+      <div class="formula-box">C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O + <strong>energia</strong></div>
+      <textarea class="answer-input" data-save="q17c" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Mi okozza az izomfájdalmat intenzív mozgás után? </div>
+      <textarea class="answer-input" data-save="q17d" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">e) Egy sportoló napi szükséglete 12 600 kJ, ebből 30% zsírból fedezi. Mennyi zsírt kell fogyasztania? </div>
+      <textarea class="answer-input" data-save="q17e" placeholder="Számítás és eredmény…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 18 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">18</div>
+    <div class="task-body">
+      <div class="question"><strong>Energiaforrások összehasonlítása</strong></div>
+      <div style="background:#eef4fb;border-left:4px solid #1a5276;padding:10px 14px;margin:8px 0;font-size:10.5pt;color:#1a3a5c;"><strong>Háttér-információ:</strong> <strong>Mértékegységek:</strong> 1 GWh (gigawattóra) = 1 000 000 kWh (kilowattóra) = 1 000 MWh (megawattóra).<br><strong>Vízerőmű gátak ökológiai hatásai:</strong> A folyami gátak megújuló energiát termelnek, de ökológiai hatásaik is vannak: elvágják a vándorló halak (pl. lazac, tokhal) útvonalát; megakadályozzák a hordalék szállítását; területeket árasztanak el; megváltoztatják a víz hőmérsékletét és oxigéntartalmát, ami az egész folyó ökoszisztémáját érinti.</div>
+      <figure class="figure">
+        <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;font-family:'Source Serif 4',serif;font-size:9px;">
+          <rect width="480" height="190" fill="#fafaf5" rx="4"/>
+          <g transform="translate(130,95)">
+            <path d="M0,0 L78,0 A78,78,0,0,1,-43.4,64.7 Z" fill="#c0392b"/>
+            <path d="M0,0 L-43.4,64.7 A78,78,0,0,1,-66.1,-39.4 Z" fill="#e67e22"/>
+            <path d="M0,0 L-66.1,-39.4 A78,78,0,0,1,-20.2,-75.4 Z" fill="#9b59b6"/>
+            <path d="M0,0 L-20.2,-75.4 A78,78,0,0,1,36.6,-68.3 Z" fill="#2980b9"/>
+            <path d="M0,0 L36.6,-68.3 A78,78,0,0,1,72.6,-27.4 Z" fill="#27ae60"/>
+            <path d="M0,0 L72.6,-27.4 A78,78,0,0,1,76.2,-13.7 Z" fill="#f1c40f"/>
+            <path d="M0,0 L76.2,-13.7 A78,78,0,0,1,78,0 Z" fill="#95a5a6"/>
+          </g>
+          <g font-size="9">
+            <rect x="230" y="20" width="12" height="12" fill="#c0392b"/><text x="248" y="30" fill="#1a1a2e">Szén / kőolaj – 38%</text>
+            <rect x="230" y="38" width="12" height="12" fill="#e67e22"/><text x="248" y="48" fill="#1a1a2e">Földgáz – 23%</text>
+            <rect x="230" y="56" width="12" height="12" fill="#9b59b6"/><text x="248" y="66" fill="#1a1a2e">Nukleáris – 10%</text>
+            <rect x="230" y="74" width="12" height="12" fill="#2980b9"/><text x="248" y="84" fill="#1a1a2e">Vízenergia – 16%</text>
+            <rect x="230" y="92" width="12" height="12" fill="#27ae60"/><text x="248" y="102" fill="#1a1a2e">Szélenergia – 7%</text>
+            <rect x="230" y="110" width="12" height="12" fill="#f1c40f"/><text x="248" y="120" fill="#1a1a2e">Napenergia – 4%</text>
+            <rect x="230" y="128" width="12" height="12" fill="#95a5a6"/><text x="248" y="138" fill="#1a1a2e">Egyéb – 2%</text>
+          </g>
+          <text x="130" y="180" fill="#1a1a2e" font-size="9" text-anchor="middle">Villamosenergia-termelés megoszlása (világ, 2022)</text>
+        </svg>
+        <figcaption>6. ábra – Globális villamosenergia-termelés megoszlása</figcaption>
+      </figure>
+      <table>
+        <tr><th>Energiaforrás</th><th>CO₂-kibocsátás (g/kWh)</th><th>Megújuló?</th><th>Folyamatos?</th></tr>
+        <tr><td class="td-left">Szén</td><td>820</td><td>Nem</td><td>Igen</td></tr>
+        <tr><td class="td-left">Nukleáris</td><td>12</td><td>Nem</td><td>Igen</td></tr>
+        <tr><td class="td-left">Szélenergia</td><td>11</td><td>Igen</td><td>Nem</td></tr>
+        <tr><td class="td-left">Napenergia</td><td>45</td><td>Igen</td><td>Nem</td></tr>
+        <tr><td class="td-left">Vízenergia</td><td>24</td><td>Igen</td><td>Igen*</td></tr>
+      </table>
+      <div class="sub-question">a) Melyik forrás a legkisebb CO₂-kibocsátású ÉS megújuló? </div>
+      <input type="text" class="answer-input" data-save="q18a" placeholder="Válasz…">
+      <div class="sub-question">b) Miért nem válthatók ki azonnal a szénerőművek napelemparkokkal? (két ok) </div>
+      <textarea class="answer-input" data-save="q18b" placeholder="1. …  2. …"></textarea>
+      <div class="sub-question">c) 100 GWh energia szénerőműből: mennyi CO₂ keletkezik? </div>
+      <textarea class="answer-input" data-save="q18c" placeholder="Számítás…"></textarea>
+      <div class="sub-question">d) Milyen biológiai problémát okoz egy folyami vízerőmű gátja? </div>
+      <textarea class="answer-input" data-save="q18d" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">e) Magyarország milyen megújuló energiaforrásokat hasznosíthatna legjobban? </div>
+      <textarea class="answer-input" data-save="q18e" placeholder="Felsorolás + indoklás…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 19 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">19</div>
+    <div class="task-body">
+      <div class="question"><strong>A Föld belső szerkezete és a kőzetciklus</strong></div>
+      <div style="background:#f9f4e8;border:1px solid #d4c090;padding:10px 14px;margin:8px 0;font-size:10.5pt;border-left:4px solid #b8860b;"><strong>Háttér-információ:</strong><br>• A <strong>hőmérséklet</strong> a mélységgel nő (radioaktív bomlás + keletkezéskori hő): belső mag ~5000 °C. A <strong>nyomás</strong> is nő – a felette lévő kőzetek súlyából adódik.<br>• A <strong>kontinentális kéreg</strong> gránitos, sűrűsége ~2,7 g/cm³, vastagsága 30–70 km. Az <strong>óceáni kéreg</strong> bazaltos, sűrűbb (~3,0 g/cm³), csak 5–10 km vastag. Ütközéskor az óceáni bukik le a kontinentális alá (szubdukció).</div>
+      <figure class="figure">
+        <svg viewBox="0 0 590 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;font-family:serif;font-size:11px;">
+          <defs>
+            <marker id="arr19" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#555"/>
+            </marker>
+          </defs>
+
+          <!-- háttér -->
+          <rect width="590" height="225" fill="#fafaf5" rx="3"/>
+
+          <!-- ══ JOBB FÉLKÖR METSZET (path, nincs clipPath) ══
+               Középpont: cx=150, cy=112
+               Félkör: M cx,cy-r  A r,r,0,0,1,cx,cy+r  Z  (jobb D-alakú félkör)
+               Rétegek: felszín r=105, kéreg r=98, köpeny r=78, külső mag r=45, belső mag r=21 -->
+
+          <!-- Felszín/növényzet r=105 → top=7, bottom=217 -->
+          <path d="M 150,7 A 105,105,0,0,1,150,217 Z" fill="#27ae60" opacity="0.8"/>
+          <!-- Kéreg r=98 → top=14, bottom=210 -->
+          <path d="M 150,14 A 98,98,0,0,1,150,210 Z" fill="#8B6914"/>
+          <!-- Köpeny r=78 → top=34, bottom=190 -->
+          <path d="M 150,34 A 78,78,0,0,1,150,190 Z" fill="#f39c12" opacity="0.95"/>
+          <!-- Külső mag r=45 → top=67, bottom=157 -->
+          <path d="M 150,67 A 45,45,0,0,1,150,157 Z" fill="#e67e22"/>
+          <!-- Belső mag r=21 → top=91, bottom=133 -->
+          <path d="M 150,91 A 21,21,0,0,1,150,133 Z" fill="#c0392b"/>
+
+          <!-- Átmérő vonal (flat/cut side) -->
+          <line x1="150" y1="7" x2="150" y2="217" stroke="#666" stroke-width="1.5" opacity="0.6"/>
+
+          <!-- ══ FELIRATOK – a félkörön jobbra kívül ══
+               Jobb élek: belső mag x=171, külső mag x=195, köpeny x=228, kéreg x=248, felszín x=255 -->
+
+          <!-- Belső mag: vonal (171,112)→(270,58) -->
+          <line x1="171" y1="112" x2="268" y2="60" stroke="#888" stroke-width="1" marker-end="url(#arr19)"/>
+          <text x="272" y="58" fill="#c0392b" font-weight="bold" font-size="11">Belső mag (~5000 °C)</text>
+
+          <!-- Külső mag: vonal (195,100)→(270,85) -->
+          <line x1="194" y1="99" x2="268" y2="86" stroke="#888" stroke-width="1" marker-end="url(#arr19)"/>
+          <text x="272" y="84" fill="#c07010" font-weight="bold" font-size="11">Külső mag (folyékony)</text>
+
+          <!-- Köpeny: vonal (228,112)→(270,112) -->
+          <line x1="228" y1="112" x2="268" y2="112" stroke="#888" stroke-width="1" marker-end="url(#arr19)"/>
+          <text x="272" y="116" fill="#b07000" font-weight="bold" font-size="11">Köpeny (~1300 °C)</text>
+
+          <!-- Kéreg: vonal (246,130)→(270,145) -->
+          <line x1="246" y1="131" x2="268" y2="145" stroke="#888" stroke-width="1" marker-end="url(#arr19)"/>
+          <text x="272" y="149" fill="#5a3e0a" font-weight="bold" font-size="11">Kéreg (5–70 km)</text>
+
+          <!-- ══ KŐZETCIKLUS – bal oldal (x=4..140) ══ -->
+          <text x="5" y="20" fill="#1a1a2e" font-size="12" font-weight="bold">Kőzetciklus:</text>
+
+          <rect x="4" y="30" width="88" height="24" rx="3" fill="#c0392b" opacity="0.9"/>
+          <text x="48" y="47" fill="white" text-anchor="middle" font-size="11">Magmás kőzet</text>
+
+          <rect x="4" y="94" width="88" height="24" rx="3" fill="#2980b9" opacity="0.9"/>
+          <text x="48" y="111" fill="white" text-anchor="middle" font-size="11">Üledékes kőzet</text>
+
+          <rect x="4" y="158" width="88" height="24" rx="3" fill="#8e44ad" opacity="0.9"/>
+          <text x="48" y="175" fill="white" text-anchor="middle" font-size="11">Metamorf kőzet</text>
+
+          <!-- Kőzetciklus nyilak (marad a kör bal oldalán) -->
+          <path d="M 92,42 Q 118,58 118,80 Q 118,96 92,106" stroke="#555" stroke-width="1.3" fill="none" marker-end="url(#arr19)"/>
+          <text x="120" y="73" fill="#555" font-size="10">mállás,</text>
+          <text x="120" y="85" fill="#555" font-size="10">lerakódás</text>
+
+          <path d="M 92,106 Q 118,122 118,142 Q 118,160 92,170" stroke="#555" stroke-width="1.3" fill="none" marker-end="url(#arr19)"/>
+          <text x="120" y="138" fill="#555" font-size="10">nyomás,</text>
+          <text x="120" y="150" fill="#555" font-size="10">hő</text>
+
+          <!-- Visszafelé nyíl: olvadás (bal szélen belül marad) -->
+          <path d="M 4,170 C 2,192 2,200 4,42" stroke="#c0392b" stroke-width="1.3" fill="none" marker-end="url(#arr19)" stroke-dasharray="5,3"/>
+          <text x="0" y="218" fill="#c0392b" font-size="10" text-anchor="start">olvadás</text>
+        </svg>
+        <figcaption>7. ábra – Föld belső szerkezete és kőzetciklus</figcaption>
+      </figure>
+      <div class="sub-question">a) Sorold fel a Föld rétegeit felszíntől középpontig! </div>
+      <input type="text" class="answer-input" data-save="q19a" placeholder="1. … → 2. … → 3. … → 4. …">
+      <div class="sub-question">b) Miért nő a hőmérséklet és a nyomás a Föld belseje felé? </div>
+      <textarea class="answer-input" data-save="q19b" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">c) Milyen kőzet keletkezik, ha a magma a felszínen hűl ki? Adj példát! </div>
+      <input type="text" class="answer-input" data-save="q19c" placeholder="Kőzettípus és példa…">
+      <div class="sub-question">d) Mi a különbség az üledékes és a metamorf kőzet keletkezése között? </div>
+      <textarea class="answer-input" data-save="q19d" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">e) Miért sűrűbb az óceáni kéreg, mint a kontinentális? </div>
+      <textarea class="answer-input" data-save="q19e" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 20 -->
+<div class="task">
+  <div class="task-header">
+    <div class="task-num hard">20</div>
+    <div class="task-body">
+      <div class="question"><strong>Ökológiai láncolat és anyagkörforgás</strong></div>
+      <div class="reading-box">
+        Egy magyarországi tölgyerdőben a következő szervezetek élnek együtt: <em>tölgyfa, cserjék, zuzmók, egerek, rókák, baglyok, bogarak, gombák</em> és számtalan <em>baktérium</em>. Az egerek tölgymakkon és magvakon táplálkoznak. A rókák és baglyok egereket fogyasztanak. A gombák és baktériumok az elhalt szerves anyagot bontják le.<br><br>
+        <strong>Fogalmak:</strong> A <strong>producens</strong> olyan szervezet, amely fotoszintézissel maga állít elő szerves anyagot (pl. növények, algák). A <strong>konzumens</strong> más szervezetet fogyaszt táplálékként – lehet növényevő (1. rendű) vagy ragadozó (2., 3. rendű). A <strong>dekomponáló</strong> az elhalt szerves anyagot szervetlen anyaggá bontja le, visszajuttatva a tápanyagokat a talajba (pl. gombák, baktériumok).
+      </div>
+      <div class="sub-question">a) Írj le egy legalább 4 tagból álló táplálékláncat az erdőből! </div>
+      <textarea class="answer-input" data-save="q20a" placeholder="pl.: … → … → … → …" style="min-height:50px;"></textarea>
+      <div class="sub-question">b) Mit jelent a producens, konzumens és dekomponáló? Sorolj fel példát mindháromra! </div>
+      <textarea class="answer-input" data-save="q20b" placeholder="Producens: … – Konzumens: … – Dekomponáló: …"></textarea>
+      <div class="sub-question">c) Ha a rókák száma megcsökken, mi történik az egérpopulációval és a tölgyfaállománnyal? </div>
+      <textarea class="answer-input" data-save="q20d" placeholder="Magyarázat…"></textarea>
+      <div class="sub-question">d) Miért lesz tápanyaghiányos a talaj erdőirtás után? Kapcsold össze a dekomponálóok szerepével! </div>
+      <textarea class="answer-input" data-save="q20e" placeholder="Magyarázat…"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- Pontösszesítő -->
+<div class="score-summary">
+  <h3>Pontösszesítő (javítónak)</h3>
+  <table>
+    <tr><th>Rész</th><th>Feladatok</th><th>Max. pont</th><th>Elért pont</th></tr>
+    <tr><td>I. Rész</td><td>1–8</td><td>15</td><td></td></tr>
+    <tr><td>II. Rész</td><td>9–14</td><td>24</td><td></td></tr>
+    <tr><td>III. Rész</td><td>15–20</td><td>42</td><td></td></tr>
+    <tr style="background:#ffe;"><td colspan="2"><strong>ÖSSZESEN</strong></td><td><strong>81</strong></td><td></td></tr>
+  </table>
+</div>
+
+<div class="score-summary" style="margin-top:16px;">
+  <h3>Javítási táblázat</h3>
+  <table>
+    <tr><th>Feladat</th><th>Max. pont</th><th>Elért pont</th><th>Feladat</th><th>Max. pont</th><th>Elért pont</th></tr>
+    <tr><td>1.</td><td>1</td><td></td><td>11.</td><td>3</td><td></td></tr>
+    <tr><td>2.</td><td>1</td><td></td><td>12.</td><td>4</td><td></td></tr>
+    <tr><td>3.</td><td>2</td><td></td><td>13.</td><td>4</td><td></td></tr>
+    <tr><td>4.</td><td>2</td><td></td><td>14.</td><td>3</td><td></td></tr>
+    <tr><td>5.</td><td>2</td><td></td><td>15.</td><td>5</td><td></td></tr>
+    <tr><td>6.</td><td>5</td><td></td><td>16.</td><td>8</td><td></td></tr>
+    <tr><td>7.</td><td>1</td><td></td><td>17.</td><td>7</td><td></td></tr>
+    <tr><td>8.</td><td>1</td><td></td><td>18.</td><td>7</td><td></td></tr>
+    <tr><td>9.</td><td>6</td><td></td><td>19.</td><td>5</td><td></td></tr>
+    <tr><td>10.</td><td>4</td><td></td><td>20.</td><td>10</td><td></td></tr>
+    <tr style="background:#ffe;"><td colspan="2"><strong>ÖSSZESEN</strong></td><td></td><td colspan="2"><strong>MAX. PONT</strong></td><td><strong>81</strong></td></tr>
+  </table>
+</div>
+
+
+<!-- ══ BEKÜLDÉSI MODAL ══ -->
+<div id="submitModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:white;max-width:480px;width:90%;border-radius:6px;padding:32px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.3);">
+    <div style="font-family:Georgia,serif;font-size:16pt;font-weight:700;color:#1a1a2e;margin-bottom:6px;">📤 Válaszok beküldése</div>
+    <div style="font-size:10pt;color:#555;margin-bottom:20px;">A válaszaidat emailben küldjük el a tanárodnak. Töltsd ki az adatokat!</div>
+
+    <div id="submitError" style="display:none;background:#fdecea;border-left:4px solid #c0392b;padding:10px 14px;margin-bottom:14px;font-size:10pt;color:#c0392b;border-radius:3px;"></div>
+    <div id="submitSuccess" style="display:none;background:#eafaf1;border-left:4px solid #27ae60;padding:10px 14px;margin-bottom:14px;font-size:10pt;color:#1a6b4a;border-radius:3px;"></div>
+
+    <div style="margin-bottom:12px;">
+      <label style="display:block;font-size:10pt;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Teljes neved *</label>
+      <input type="text" id="submitName" placeholder="pl. Kovács Anna" style="width:100%;border:1.5px solid #c8bfa8;padding:8px 12px;font-size:11pt;border-radius:3px;font-family:Georgia,serif;outline:none;">
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="display:block;font-size:10pt;font-weight:700;color:#1a1a2e;margin-bottom:4px;">Osztályod *</label>
+      <input type="text" id="submitClass" placeholder="pl. 7.b" style="width:100%;border:1.5px solid #c8bfa8;padding:8px 12px;font-size:11pt;border-radius:3px;font-family:Georgia,serif;outline:none;">
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button onclick="submitAnswers()" id="sendBtn" style="flex:1;background:#8e44ad;color:white;border:none;padding:12px;font-size:11pt;font-family:Georgia,serif;font-weight:700;cursor:pointer;border-radius:3px;">📤 Elküldés</button>
+      <button onclick="closeSubmitModal()" style="flex:1;background:#e8e4d8;color:#1a1a2e;border:none;padding:12px;font-size:11pt;font-family:Georgia,serif;cursor:pointer;border-radius:3px;">Mégse</button>
+    </div>
+
+    <div style="font-size:8.5pt;color:#999;margin-top:14px;text-align:center;">A válaszaid biztonságosan kerülnek elküldésre a tanárhoz.</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+// ── STORAGE KEY ──
+const STORAGE_KEY = 'ttverseny_2025';
+
+// ── COLLECT ALL SAVEABLE ELEMENTS ──
+function getSaveableElements() {
+  return document.querySelectorAll('[data-save]');
+}
+
+// ── SAVE (localStorage + PDF letöltés) ──
+function saveAnswers(silent = false) {
+  const data = {};
+  getSaveableElements().forEach(el => {
+    const key = el.getAttribute('data-save');
+    if (el.type === 'radio') {
+      if (el.checked) data[key] = el.value;
+    } else {
+      data[key] = el.value;
+    }
+  });
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    if (!silent) {
+      const status = document.getElementById('saveStatus');
+      encodeAnswersToURL();
+    status.textContent = '✓ Mentve + PDF letöltve: ' + new Date().toLocaleTimeString('hu-HU');
+      setTimeout(() => { status.textContent = ''; }, 4000);
+      const name = document.getElementById('nev') ? document.getElementById('nev').value.trim() : '';
+      const cls  = document.getElementById('evf') ? document.getElementById('evf').value.trim() : '';
+      savePDF(name, cls);
+    }
+  } catch(e) {
+    alert('Hiba a mentésnél!');
+  }
+  updateProgress();
+}
+
+// ── PDF mentés a versenyző nevével (felülírja az előzőt) ──
+function savePDF(name, cls) {
+  if (typeof window.jspdf === 'undefined') return;
+  const displayName = name || 'Névtelen';
+  const displayCls  = cls  || '';
+  // Fájlnév = versenyző neve (ékezetek nélkül, szóközök helyett _)
+  const safeName = displayName.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+  const filename = (safeName || 'versenyzo') + '_verseny.pdf';
+  generatePDF(displayName, displayCls || '–', filename);
+}
+
+
+
+// ═══════════════════════════════════════════════════════
+// ── HTML-HŰEN KITÖLTÖTT PDF – html2canvas + jsPDF ──
+// ═══════════════════════════════════════════════════════
+async function generateFilledPDF() {
+  const statusEl = document.getElementById('saveStatus');
+  statusEl.textContent = '⏳ PDF generálása folyamatban…';
+
+  // 1. Inject kitöltött értékek
+  const injected = [];
+
+  document.querySelectorAll('input.answer-input, textarea.answer-input').forEach(el => {
+    if (el.closest('td')) return; // td-ben lévőket külön kezeljük
+    const val = el.value.trim() || '–';
+    const div = document.createElement('div');
+    div.className = 'print-value';
+    div.style.cssText = 'display:block;font-family:inherit;font-size:inherit;color:#1a1a2e;border-bottom:1px solid #c8bfa8;min-height:' + Math.max(el.offsetHeight || 36, 36) + 'px;padding:4px 6px;margin:4px 0;white-space:pre-wrap;word-break:break-word;background:white;';
+    div.textContent = val;
+    el.style.display = 'none';
+    el.parentNode.insertBefore(div, el.nextSibling);
+    injected.push({div, el});
+  });
+
+  document.querySelectorAll('input.inline-input').forEach(el => {
+    const val = el.value.trim() || '–';
+    const span = document.createElement('span');
+    span.style.cssText = 'display:inline-block;min-width:80px;border-bottom:1.5px solid #1a1a2e;padding:2px 4px;font-family:inherit;color:#1a1a2e;';
+    span.textContent = val;
+    el.style.display = 'none';
+    el.parentNode.insertBefore(span, el.nextSibling);
+    injected.push({div: span, el});
+  });
+
+  document.querySelectorAll('td input.answer-input').forEach(el => {
+    const val = el.value.trim() || '–';
+    const div = document.createElement('div');
+    div.style.cssText = 'font-family:inherit;font-size:9.5pt;color:#1a1a2e;padding:2px 4px;';
+    div.textContent = val;
+    el.style.display = 'none';
+    el.parentNode.insertBefore(div, el.nextSibling);
+    injected.push({div, el});
+  });
+
+  const selectedLis = [];
+  document.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+    const li = el.closest('li');
+    if (li) {
+      li.style.fontWeight = 'bold';
+      li.style.background = '#eef4fb';
+      li.style.borderRadius = '3px';
+      selectedLis.push(li);
+    }
+  });
+
+  const toolbar = document.querySelector('.toolbar');
+  const origDisplay = toolbar ? toolbar.style.display : '';
+  if (toolbar) toolbar.style.display = 'none';
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pdfW = 210;
+    const pageH = 277; // hasznos magasság margóval
+    const marginTop = 10;
+    const marginSide = 10;
+    const contentW = pdfW - marginSide * 2;
+    let currentY = marginTop;
+    let firstPage = true;
+
+    // Fejléc + versenyző adatai + útmutató = egyetlen blokk az első oldalon
+    const headerBlock = document.querySelector('.page > .header') ||
+                        document.querySelector('header.header');
+    const contestantBlock = document.querySelector('.contestant-box');
+    const guideBlock = document.querySelector('.guide-box');
+
+    const topSections = [headerBlock, contestantBlock, guideBlock].filter(Boolean);
+
+    for (const section of topSections) {
+      const canvas = await html2canvas(section, { scale: 2, useCORS: true, allowTaint: true, scrollY: -window.scrollY });
+      const imgH = (canvas.height * contentW) / canvas.width;
+      if (!firstPage && currentY + imgH > pageH + marginTop) {
+        doc.addPage(); currentY = marginTop;
+      }
+      doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', marginSide, currentY, contentW, imgH);
+      currentY += imgH + 4;
+      firstPage = false;
+    }
+
+    // Feladatok egyenként – ha nem fér el, új oldal
+    const tasks = document.querySelectorAll('.task');
+    for (const task of tasks) {
+      const canvas = await html2canvas(task, { scale: 2, useCORS: true, allowTaint: true, scrollY: -window.scrollY });
+      const imgH = (canvas.height * contentW) / canvas.width;
+
+      // Ha nem fér el az aktuális oldalon → új oldal
+      if (currentY + imgH > pageH + marginTop) {
+        doc.addPage();
+        currentY = marginTop;
+      }
+
+      doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', marginSide, currentY, contentW, imgH);
+      currentY += imgH + 3;
+    }
+
+    // Pontösszesítő
+    const scoreBox = document.querySelector('.score-summary');
+    if (scoreBox) {
+      const canvas = await html2canvas(scoreBox, { scale: 2, useCORS: true, allowTaint: true, scrollY: -window.scrollY });
+      const imgH = (canvas.height * contentW) / canvas.width;
+      if (currentY + imgH > pageH + marginTop) { doc.addPage(); currentY = marginTop; }
+      doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', marginSide, currentY, contentW, imgH);
+    }
+
+    // Fájlnév
+    const name = (document.getElementById('nev') ? document.getElementById('nev').value.trim() : '') || 'versenyzo';
+    const safeName = name.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+    doc.save((safeName || 'versenyzo') + '_kitoltve.pdf');
+
+    statusEl.textContent = '✓ PDF letöltve: ' + new Date().toLocaleTimeString('hu-HU');
+    setTimeout(() => { statusEl.textContent = ''; }, 4000);
+
+  } catch(err) {
+    statusEl.textContent = '⚠️ PDF hiba: ' + err.message;
+    setTimeout(() => { statusEl.textContent = ''; }, 5000);
+  }
+
+  // 4. Visszaállítás
+  injected.forEach(({div, el}) => { div.remove(); el.style.display = ''; });
+  selectedLis.forEach(li => { li.style.fontWeight = ''; li.style.background = ''; li.style.borderRadius = ''; });
+  if (toolbar) toolbar.style.display = origDisplay;
+}
+// ═══════════════════════════════════════════════════
+// ── NYOMTATÁS – HTML megjelenéssel, kitöltve ──
+// ═══════════════════════════════════════════════════
+function printFilled() {
+  // 1. Mentés
+  saveAnswers(true);
+
+  // 2. Minden input/textarea mellé .print-value span-t szúrunk
+  const injected = [];
+
+  // Szöveges mezők (input, textarea)
+  document.querySelectorAll('input.answer-input, textarea.answer-input').forEach(el => {
+    if (el.closest('td')) return; // td-ben lévőket külön kezeljük
+    const val = el.value.trim() || '–';
+    const div = document.createElement('div');
+    div.className = 'print-value';
+    if (el.tagName === 'TEXTAREA') div.style.minHeight = (el.offsetHeight || 60) + 'px';
+    div.textContent = val;
+    el.parentNode.insertBefore(div, el.nextSibling);
+    injected.push(div);
+  });
+
+  // Inline input-ok (párosítás, fotoszintézis stb.)
+  document.querySelectorAll('input.inline-input').forEach(el => {
+    const val = el.value.trim() || '–';
+    const span = document.createElement('span');
+    span.className = 'print-value inline';
+    span.textContent = val;
+    el.parentNode.insertBefore(span, el.nextSibling);
+    injected.push(span);
+  });
+
+  // Táblázat cellában lévő input-ok
+  document.querySelectorAll('td input.answer-input').forEach(el => {
+    const val = el.value.trim() || '–';
+    const div = document.createElement('div');
+    div.className = 'print-value table-val';
+    div.textContent = val;
+    el.parentNode.insertBefore(div, el.nextSibling);
+    injected.push(div);
+  });
+
+  // Rádiógombok – kiválasztott opció kiemelése
+  const radioGroups = new Set();
+  document.querySelectorAll('input[type="radio"]').forEach(el => {
+    if (!radioGroups.has(el.name)) {
+      radioGroups.add(el.name);
+      const checked = document.querySelector(`input[name="${el.name}"]:checked`);
+      if (checked) {
+        const li = checked.closest('li');
+        if (li) li.classList.add('selected');
+      }
+    }
+  });
+
+  // 3. Nyomtatás
+  window.print();
+
+  // 4. Visszaállítás (nyomtatás után)
+  injected.forEach(el => el.remove());
+  document.querySelectorAll('li.selected').forEach(li => li.classList.remove('selected'));
+}
+
+// ── LOAD (URL hash elsőbbséggel, majd localStorage) ──
+function loadAnswers() {
+  // 1. Próbálja az URL hash-ből visszaállítani
+  const fromURL = decodeAnswersFromURL();
+  if (!fromURL) {
+    // 2. Ha nincs hash, localStorage-ból tölt
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      getSaveableElements().forEach(el => {
+        const key = el.getAttribute('data-save');
+        if (data[key] === undefined) return;
+        if (el.type === 'radio') {
+          el.checked = (el.value === data[key]);
+        } else {
+          el.value = data[key];
+        }
+      });
+    } catch(e) {}
+  }
+  updateProgress();
+}
+
+// ── CLEAR ──
+function clearAnswers() {
+  if (!confirm('Biztosan törlöd az összes választ? Ez a művelet nem vonható vissza!')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  getSaveableElements().forEach(el => {
+    if (el.type === 'radio') el.checked = false;
+    else el.value = '';
+  });
+  document.getElementById('saveStatus').textContent = '🗑️ Törölve';
+  setTimeout(() => { document.getElementById('saveStatus').textContent = ''; }, 2000);
+  updateProgress();
+}
+
+// ── PROGRESS ──
+function updateProgress() {
+  const all = Array.from(getSaveableElements());
+  // radio groups count once
+  const radioGroups = new Set();
+  let total = 0, filled = 0;
+  all.forEach(el => {
+    if (el.type === 'radio') {
+      if (!radioGroups.has(el.name)) {
+        radioGroups.add(el.name);
+        total++;
+        if (document.querySelector(`input[name="${el.name}"]:checked`)) filled++;
+      }
+    } else {
+      total++;
+      if (el.value && el.value.trim().length > 0) filled++;
+    }
+  });
+  const pct = total > 0 ? Math.round(filled / total * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// ── AUTO-SAVE EVERY 30 SECONDS ──
+setInterval(() => { saveAnswers(true); encodeAnswersToURL(); }, 30000);
+
+// ── LIVE PROGRESS UPDATE + URL KÓDOLÁS ──
+document.addEventListener('input', () => { updateProgress(); encodeAnswersToURL(); });
+document.addEventListener('change', () => { updateProgress(); encodeAnswersToURL(); });
+
+// ── LOAD ON START ──
+window.addEventListener('DOMContentLoaded', loadAnswers);
+
+
+
+// ═══════════════════════════════════════════════════════
+// ── URL-ALAPÚ MENTÉS (hash) ──
+// A válaszok a böngésző URL #hash részébe kerülnek.
+// Ha valaki visszamásolja az URL-t, minden válasz visszajön.
+// ═══════════════════════════════════════════════════════
+
+function encodeAnswersToURL() {
+  const data = {};
+  getSaveableElements().forEach(el => {
+    const key = el.getAttribute('data-save');
+    if (el.type === 'radio') {
+      if (el.checked) data[key] = el.value;
+    } else if (el.value && el.value.trim()) {
+      data[key] = el.value;
+    }
+  });
+  try {
+    const json = JSON.stringify(data);
+    const encoded = btoa(unescape(encodeURIComponent(json)));
+    history.replaceState(null, '', '#' + encoded);
+  } catch(e) {}
+}
+
+function decodeAnswersFromURL() {
+  try {
+    const hash = window.location.hash.slice(1);
+    if (!hash || hash.length < 10) return false;
+    const json = decodeURIComponent(escape(atob(hash)));
+    const data = JSON.parse(json);
+    getSaveableElements().forEach(el => {
+      const key = el.getAttribute('data-save');
+      if (data[key] === undefined) return;
+      if (el.type === 'radio') {
+        el.checked = (el.value === data[key]);
+      } else {
+        el.value = data[key];
+      }
+    });
+    return true;
+  } catch(e) { return false; }
+}
+
+// ─── KILÉPÉS ELŐTTI FIGYELMEZTETÉS ───
+window.addEventListener('beforeunload', function(e) {
+  // Csak akkor figyelmeztet, ha van kitöltött mező
+  const hasData = Array.from(getSaveableElements()).some(el => {
+    if (el.type === 'radio') return el.checked;
+    return el.value && el.value.trim().length > 0;
+  });
+  if (hasData) {
+    const msg = 'A válaszaid elveszhetnek! Mentsd el a PDF-t vagy másold le a mentési linket!';
+    e.preventDefault();
+    e.returnValue = msg;
+    return msg;
+  }
+});
+
+// ═══════════════════════════════════════════
+// ── PDF GENERÁLÁS jsPDF-fel ──
+// ═══════════════════════════════════════════
+function generatePDF(name, cls, filename) {
+  filename = filename || (name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'_') + '_' + cls.replace(/\s+/g,'_') + '_verseny.pdf');
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const pageW = 210;
+  const margin = 18;
+  const colW = pageW - margin * 2;
+  let y = 20;
+
+  const ACCENT = [192, 57, 43];
+  const BLUE   = [26, 82, 118];
+  const INK    = [26, 26, 46];
+  const GRAY   = [100, 100, 110];
+  const LIGHT  = [245, 242, 233];
+
+  function checkPage(needed = 10) {
+    if (y + needed > 275) { doc.addPage(); y = 18; }
+  }
+
+  // ── Fejléc ──
+  doc.setFillColor(...ACCENT);
+  doc.rect(0, 0, 210, 12, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text('Csodát virágzik a jelen – Természettudományos verseny 2025/2026', 105, 8, { align: 'center' });
+
+  y = 20;
+  doc.setTextColor(...INK);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.text('Kitöltött válaszlap', margin, y);
+  y += 8;
+
+  // ── Versenyző adatai ──
+  doc.setFillColor(...LIGHT);
+  doc.rect(margin, y, colW, 16, 'F');
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(...GRAY);
+  doc.text('Versenyző neve:', margin + 4, y + 5);
+  doc.text('Osztály:', margin + 4, y + 11);
+  doc.setTextColor(...INK);
+  doc.setFont('helvetica', 'bold');
+  doc.text(name, margin + 40, y + 5);
+  doc.text(cls,  margin + 40, y + 11);
+  y += 22;
+
+  // ── Feladatok csoportonként ──
+  const SECTIONS = [
+    { label: '1. Rész – 1–8. feladat', color: ACCENT,
+      tasks: [
+        { num:'1.', key:'q1', label:'Melyik sejtszervecske végzi a fotoszintézist?' },
+        { num:'2.', key:'q2', label:'Nátrium jele a periódusos rendszerben?' },
+        { num:'3.', label:'Mértékegységek párosítása', sub:[
+          {key:'q3_1',l:'1–'},{key:'q3_2',l:'2–'},{key:'q3_3',l:'3–'},{key:'q3_4',l:'4–'}]},
+        { num:'4.', label:'Légköri rétegek', sub:[
+          {key:'q4_A',l:'(A)'},{key:'q4_B',l:'(B)'}]},
+        { num:'5.', label:'Fotoszintézis egyenlet', sub:[
+          {key:'q5_1',l:'bal oldal'},{key:'q5_2',l:'jobb oldal'}]},
+        { num:'6.', label:'pH – kémhatás táblázat', sub:[
+          {key:'q6_t1',l:'Gyomorsav'},{key:'q6_t2',l:'Citromlé'},{key:'q6_t3',l:'Tiszta víz'},
+          {key:'q6_t4',l:'Szappan'},{key:'q6_t5',l:'Sütőszóda'},{key:'q6_t6',l:'H. lúg'},
+          {key:'q6a',l:'b)'},{key:'q6b',l:'c)'},{key:'q6d',l:'d)'}]},
+        { num:'7.', key:'q7', label:'Energiaátalakulás (labda)' },
+        { num:'8.', key:'q8', label:'Magyarország éghajlata' },
+      ]},
+    { label: '2. Rész – 9–14. feladat', color: BLUE,
+      tasks: [
+        { num:'9.', label:'Sűrűség és felhajtóerő', sub:[{key:'q9a',l:'a)'},{key:'q9b',l:'b)'},{key:'q9c',l:'c)'}]},
+        { num:'10.', label:'Éghajlati övek', sub:[{key:'q10_A',l:'(A)'},{key:'q10_B',l:'(B)'},{key:'q10_C',l:'(C)'},{key:'q10d',l:'Miért?'}]},
+        { num:'11.', label:'Sejtes légzés vs. égés', sub:[{key:'q11_A',l:'(A)'},{key:'q11_B',l:'(B)'},{key:'q11_C',l:'(C)'}]},
+        { num:'12.', label:'Napelempark grafikon', sub:[{key:'q12a',l:'a)'},{key:'q12b',l:'b)'},{key:'q12c',l:'c)'},{key:'q12d',l:'d)'}]},
+        { num:'13.', label:'Hővezetés', sub:[{key:'q13_t1',l:'Réz'},{key:'q13_t2',l:'Gyapjú'},{key:'q13_t3',l:'Víz'},{key:'q13_t4',l:'Levegő'},{key:'q13_t5',l:'Zsír'},{key:'q13b',l:'b)'},{key:'q13c',l:'c)'},{key:'q13d',l:'d)'}]},
+        { num:'14.', label:'Talaj pH', sub:[{key:'q14a',l:'a)'},{key:'q14b',l:'b)'},{key:'q14c',l:'c)'}]},
+      ]},
+    { label: '3. Rész – 15–20. feladat', color: [26, 107, 74],
+      tasks: [
+        { num:'15.', label:'Víz körforgása', sub:[{key:'q15a',l:'a)'},{key:'q15b',l:'b)'},{key:'q15c',l:'c)'},{key:'q15d',l:'d)'},{key:'q15e',l:'e)'}]},
+        { num:'16.', label:'Üvegházhatás', sub:[{key:'q16a',l:'a)'},{key:'q16b',l:'b)'},{key:'q16c',l:'c)'},{key:'q16d',l:'d)'},{key:'q16e',l:'e)'}]},
+        { num:'17.', label:'Anyagcsere', sub:[{key:'q17a',l:'a)'},{key:'q17b',l:'b)'},{key:'q17c',l:'c)'},{key:'q17d',l:'d)'},{key:'q17e',l:'e)'}]},
+        { num:'18.', label:'Energiaforrások', sub:[{key:'q18a',l:'a)'},{key:'q18b',l:'b)'},{key:'q18c',l:'c)'},{key:'q18d',l:'d)'},{key:'q18e',l:'e)'}]},
+        { num:'19.', label:'Föld belső szerkezete', sub:[{key:'q19a',l:'a)'},{key:'q19b',l:'b)'},{key:'q19c',l:'c)'},{key:'q19d',l:'d)'},{key:'q19e',l:'e)'}]},
+        { num:'20.', label:'Ökológiai láncolat', sub:[{key:'q20a',l:'a)'},{key:'q20b',l:'b)'},{key:'q20c',l:'c)'},{key:'q20d',l:'d)'},{key:'q20e',l:'e)'}]},
+      ]},
+  ];
+
+  for (const section of SECTIONS) {
+    checkPage(14);
+    // Section header
+    doc.setFillColor(...section.color);
+    doc.rect(margin, y, colW, 8, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text(section.label, margin + 4, y + 5.5);
+    y += 12;
+
+    for (const task of section.tasks) {
+      checkPage(12);
+      // Task number box
+      doc.setFillColor(...section.color);
+      doc.rect(margin, y, 7, 7, 'F');
+      doc.setTextColor(255,255,255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text(task.num, margin + 3.5, y + 5, { align: 'center' });
+
+      doc.setTextColor(...INK);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.text(task.label || '', margin + 10, y + 5);
+      y += 9;
+
+      // Single answer
+      if (task.key) {
+        const val = (saved[task.key] || '').toString().trim() || '–';
+        doc.setFillColor(252, 250, 244);
+        doc.setDrawColor(200, 191, 168);
+        const lines = doc.splitTextToSize(val, colW - 6);
+        const boxH = lines.length * 5 + 4;
+        checkPage(boxH + 4);
+        doc.rect(margin, y, colW, boxH, 'FD');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(...INK);
+        doc.text(lines, margin + 3, y + 5);
+        y += boxH + 3;
+      }
+
+      // Sub-answers
+      if (task.sub) {
+        for (const s of task.sub) {
+          const val = (saved[s.key] || '').toString().trim() || '–';
+          const lines = doc.splitTextToSize(val, colW - 22);
+          const boxH = Math.max(lines.length * 5 + 4, 9);
+          checkPage(boxH + 2);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8.5);
+          doc.setTextColor(...GRAY);
+          doc.text(s.l, margin + 2, y + 5.5);
+          doc.setFillColor(252, 250, 244);
+          doc.setDrawColor(200, 191, 168);
+          doc.rect(margin + 14, y, colW - 14, boxH, 'FD');
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          doc.setTextColor(...INK);
+          doc.text(lines, margin + 17, y + 5);
+          y += boxH + 2;
+        }
+      }
+      y += 2;
+    }
+    y += 4;
+  }
+
+  // ── Lábléc utolsó oldalon ──
+  const pageCount = doc.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setTextColor(...GRAY);
+    doc.text(`${name} – ${cls} · Csodát virágzik a jelen · ${new Date().toLocaleDateString('hu-HU')} · ${i}/${pageCount}`, 105, 290, { align: 'center' });
+  }
+
+  // ── Fájlnév: Kovacs_Anna_7b_verseny.pdf ──
+  doc.save(filename);
+}
+
+// ════════════════════════════════════════════════════
+// ══ EMAILJS KONFIGURÁCIÓ – IDE ÍRD A SAJÁT ADATAID ══
+// ════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'PHZCPR9jm__7V0BMO';       // pl. 'AbCdEfGhIjKlMnOp'
+const EMAILJS_SERVICE_ID  = 'service_kexeyyw';       // pl. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_agaujt9';      // pl. 'template_xyz456'
+const TEACHER_EMAIL       = 'jokai.termeszettudomany@gmail.com';      // pl. 'tanar@iskola.hu'
+// ════════════════════════════════════════════════════
+
+function openSubmitModal() {
+  saveAnswers();
+  document.getElementById('submitModal').style.display = 'flex';
+  document.getElementById('submitError').style.display = 'none';
+  document.getElementById('submitSuccess').style.display = 'none';
+}
+
+function closeSubmitModal() {
+  document.getElementById('submitModal').style.display = 'none';
+}
+
+// Feladatnév térképe
+const TASK_LABELS = {
+  q1:'1.', q2:'2.', q3_1:'3. (1-C)', q3_2:'3. (2-D)', q3_3:'3. (3-A)', q3_4:'3. (4-B)',
+  q4_A:'4. (A)', q4_B:'4. (B)', q5_1:'5. (bal)', q5_2:'5. (jobb)',
+  q6_t1:'6. Gyomorsav', q6_t2:'6. Citromlé', q6_t3:'6. Tiszta víz',
+  q6_t4:'6. Szappan', q6_t5:'6. Sütőszóda', q6_t6:'6. H. lúg',
+  q6a:'6b.', q6b:'6c.', q6d:'6d.', q7:'7.', q8:'8.',
+  q9a:'9a.', q9b:'9b.', q9c:'9c.',
+  q10_A:'10A.', q10_B:'10B.', q10_C:'10C.', q10d:'10d.',
+  q11_A:'11A.', q11_B:'11B.', q11_C:'11C.',
+  q12a:'12a.', q12b:'12b.', q12c:'12c.', q12d:'12d.',
+  q13_t1:'13 Réz', q13_t2:'13 Gyapjú', q13_t3:'13 Víz',
+  q13_t4:'13 Levegő', q13_t5:'13 Zsír',
+  q13b:'13b.', q13c:'13c.', q13d:'13d.',
+  q14a:'14a.', q14b:'14b.', q14c:'14c.',
+  q15a:'15a.', q15b:'15b.', q15c:'15c.', q15d:'15d.', q15e:'15e.',
+  q16a:'16a.', q16b:'16b.', q16c:'16c.', q16d:'16d.', q16e:'16e.',
+  q17a:'17a.', q17b:'17b.', q17c:'17c.', q17d:'17d.', q17e:'17e.',
+  q18a:'18a.', q18b:'18b.', q18c:'18c.', q18d:'18d.', q18e:'18e.',
+  q19a:'19a.', q19b:'19b.', q19c:'19c.', q19d:'19d.', q19e:'19e.',
+  q20a:'20a.', q20b:'20b.', q20c:'20c.', q20d:'20d.', q20e:'20e.'
+};
+
+function buildAnswerText(name, cls) {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  let text = `VERSENYZŐ: ${name}\nOSZTÁLY: ${cls}\nIDŐPONT: ${new Date().toLocaleString('hu-HU')}\n\n`;
+  text += '═'.repeat(50) + '\n';
+  text += 'CSODÁT VIRÁGZIK A JELEN – Természettudományos verseny\n';
+  text += '═'.repeat(50) + '\n\n';
+  for (const [key, label] of Object.entries(TASK_LABELS)) {
+    const val = saved[key];
+    if (val && val.toString().trim()) {
+      text += `[${label}] ${val.trim()}\n`;
+    } else {
+      text += `[${label}] –\n`;
+    }
+  }
+  return text;
+}
+
+async function submitAnswers() {
+  const name = document.getElementById('submitName').value.trim();
+  const cls  = document.getElementById('submitClass').value.trim();
+  const errEl = document.getElementById('submitError');
+  const sucEl = document.getElementById('submitSuccess');
+  const btn   = document.getElementById('sendBtn');
+
+  errEl.style.display = 'none';
+  sucEl.style.display = 'none';
+
+  if (!name) { errEl.textContent = 'Kérlek add meg a nevedet!'; errEl.style.display = 'block'; return; }
+  if (!cls)  { errEl.textContent = 'Kérlek add meg az osztályodat!'; errEl.style.display = 'block'; return; }
+
+  if (EMAILJS_PUBLIC_KEY === 'IDE_A_PUBLIC_KEY') {
+    errEl.textContent = 'Az EmailJS még nincs beállítva. Kérlek töltsd ki a konfigurációs adatokat a HTML-ben!';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = '⏳ Küldés...';
+  btn.disabled = true;
+
+  try {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    const result = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:  TEACHER_EMAIL,
+      from_name: name,
+      subject:   `Verseny beküldés – ${name} (${cls})`,
+      message:   buildAnswerText(name, cls)
+    });
+
+    sucEl.textContent = `✓ Sikeresen elküldve! PDF letöltése folyamatban... (${new Date().toLocaleTimeString('hu-HU')})`;
+    sucEl.style.display = 'block';
+    btn.textContent = '✓ Elküldve!';
+    setTimeout(() => { closeSubmitModal(); generateFilledPDF(); }, 800);
+  } catch(err) {
+    errEl.textContent = 'Hiba a küldés során: ' + (err.text || err.message || JSON.stringify(err));
+    errEl.style.display = 'block';
+    btn.textContent = '📤 Elküldés';
+    btn.disabled = false;
+  }
+}
+
+// Modalt Escape-pel is be lehet zárni
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSubmitModal(); });
+
+</script>
+</body>
+</html>
